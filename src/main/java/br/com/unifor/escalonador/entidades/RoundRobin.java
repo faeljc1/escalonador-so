@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RoundRobin extends Escalonador {
+  private static int index = 0;
 
   public synchronized void iniciarAlgoritmo(int numeroCores) throws InterruptedException {
     Listas listas = Listas.getInstance();
@@ -13,7 +14,8 @@ public class RoundRobin extends Escalonador {
     exibirTela(App.painelAptos, listas.aptos1);
     while (!listas.aptosEstaVazio() || !listas.coreEstaVazio()) {
       while (!listas.aptosEstaVazio() && listas.coreTamanho() < numeroCores) {
-        listas.coreAddProcesso(listas.aptosRemoveProcesso(0));
+        listas.coreAddProcesso(index, listas.aptosRemoveProcesso(0));
+        index++;
         exibirTela(App.painelAptos, listas.aptos1);
         exibirTela(App.painelExecucao, listas.cores);
       }
@@ -28,12 +30,14 @@ public class RoundRobin extends Escalonador {
           if (p.getTempoRestante() == 0) {
             p.setQuantidade(p.getQuantidade() + 1);
             listas.finalAddProcesso(listas.coreRemoveProcessoCore(i));
+            index = i;
             exibirTela(App.painelAbortados, listas.finalAbortados);
             break;
           } else if (p.getQuantum() == 0) {
             p.setQuantum(p.getQuantumFinal());
             p.setQuantidade(p.getQuantidade() + 1);
             listas.aptosAddProcesso(listas.coreRemoveProcessoCore(i));
+            index = i;
             break;
           }
         }

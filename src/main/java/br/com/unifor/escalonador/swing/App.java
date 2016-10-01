@@ -78,7 +78,7 @@ public class App extends JFrame {
     painelParametros.add(txfNumeroProcessadores);
 
     lblQtdNumeroProcessos = new JLabel("(1, 64)");
-    lblQtdNumeroProcessos.setBounds(659, 50, 33, 14);
+    lblQtdNumeroProcessos.setBounds(659, 50, 58, 14);
     painelParametros.add(lblQtdNumeroProcessos);
 
     lblQuantum = new JLabel("Quantum");
@@ -95,7 +95,7 @@ public class App extends JFrame {
     painelParametros.add(txfQuantum);
 
     lblQtdQuantum = new JLabel("(2, 20)");
-    lblQtdQuantum.setBounds(659, 82, 33, 14);
+    lblQtdQuantum.setBounds(659, 82, 58, 14);
     painelParametros.add(lblQtdQuantum);
 
     comboBox = new JComboBox(algoritmos);
@@ -141,13 +141,13 @@ public class App extends JFrame {
     painelAptos = new JPanel();
     painelAptos.setBorder(new TitledBorder(null, "Processos Aptos",
         TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelAptos.setBounds(10, 348, 1352, 204);
+    painelAptos.setBounds(10, 348, 1352, 192);
     getContentPane().add(painelAptos);
 
     painelAbortados = new JPanel();
     painelAbortados.setBorder(new TitledBorder(null, "Processos Abortados",
         TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelAbortados.setBounds(10, 590, 1352, 111);
+    painelAbortados.setBounds(10, 536, 1352, 165);
     getContentPane().add(painelAbortados);
   }
 

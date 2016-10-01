@@ -32,12 +32,12 @@ public class Escalonador extends SwingWorker<Void, Void> {
   }
 
   @Override
-  protected Void doInBackground() throws Exception {
+  protected Void doInBackground() {
     try {
       criarProcessos();
       switch (tipoAlgoritmo) {
         case 1:
-          RoundRobin rr = new RoundRobin();
+          RoundRobin2 rr = new RoundRobin2();
           rr.iniciarAlgoritmo(numeroCores);
           break;
 
@@ -56,7 +56,17 @@ public class Escalonador extends SwingWorker<Void, Void> {
       int tempoTotal = random.nextInt(10) + 4;
       int prioridade = random.nextInt(4);
       int deadLine = random.nextInt(17) + 4;
-      int quantumAux = quantum - prioridade;
+      int quantumAux;
+
+      if (prioridade == 0) {
+        quantumAux = quantum + 3;
+      } else if (prioridade == 1) {
+        quantumAux = quantum + 2;
+      } else if (prioridade == 2) {
+        quantumAux = quantum + 1;
+      } else {
+        quantumAux = quantum;
+      }
 
       processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0);
       filaProcessos.add(processo);
@@ -81,14 +91,13 @@ public class Escalonador extends SwingWorker<Void, Void> {
           + p.getTempoTotal() + "<br>Tempo Restante: " + p.getTempoRestante() + "<br>DeadLine: "
           + p.getDeadLine() + "<br>Prioridade: " + p.getPrioridade() + "<br>Quantidade: " + p.getQuantidade() + "</body></html>");
 
-      if (p.getQuantumFinal() == quantum) {
+      if (p.getPrioridade() == 0) {
         lblProcesso.setForeground(Color.red);
-      } else if (p.getQuantumFinal() == quantum - 1) {
+      } else if (p.getPrioridade() == 1) {
         lblProcesso.setForeground(Color.blue);
-      } else if (p.getQuantumFinal() == quantum - 2) {
+      } else if (p.getPrioridade() == 2) {
         lblProcesso.setForeground(Color.orange);
       }
-
       painel.add(lblProcesso);
       painel.doLayout();
       painel.repaint();

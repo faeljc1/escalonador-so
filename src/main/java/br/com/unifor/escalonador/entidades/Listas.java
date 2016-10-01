@@ -22,8 +22,8 @@ public class Listas {
     return uniqueInstance;
   }
 
-  public synchronized void coreAddProcesso(Processo p) {
-    cores.add(p);
+  public synchronized void coreAddProcesso(int index, Processo p) {
+    cores.add(index, p);
   }
 
   public synchronized Processo coreGetProcesso(int i) {
