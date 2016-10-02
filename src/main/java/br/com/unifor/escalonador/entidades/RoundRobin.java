@@ -2,52 +2,44 @@ package br.com.unifor.escalonador.entidades;
 
 import br.com.unifor.escalonador.swing.App;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class RoundRobin extends Escalonador {
-  private static int index = 0;
+  private static Listas listas;
+  private static Cores cores;
 
   public synchronized void iniciarAlgoritmo(int numeroCores) throws InterruptedException {
-    Listas listas = Listas.getInstance();
-    //quantum = listas.aptosGetProcesso(0).getQuantum();
-    exibirTela(App.painelAptos, listas.aptos1);
-    while (!listas.aptosEstaVazio() || !listas.coreEstaVazio()) {
-      while (!listas.aptosEstaVazio() && listas.coreTamanho() < numeroCores) {
-        listas.coreAddProcesso(index, listas.aptosRemoveProcesso(0));
-        index++;
-        exibirTela(App.painelAptos, listas.aptos1);
-        exibirTela(App.painelExecucao, listas.cores);
-      }
-      for (int i = 0; i < listas.cores.size(); i++) {
-        if (!listas.coreEstaVazio()) {
-          Processo p = listas.coreGetProcesso(i);
-          int quantumRestante = p.getQuantum();
-          int tempoRestante = p.getTempoRestante();
-          p.setTempoRestante(--tempoRestante);
-          p.setQuantum(--quantumRestante);
-          exibirTela(App.painelExecucao, listas.cores);
-          if (p.getTempoRestante() == 0) {
-            p.setQuantidade(p.getQuantidade() + 1);
-            listas.finalAddProcesso(listas.coreRemoveProcessoCore(i));
-            index = i;
-            exibirTela(App.painelAbortados, listas.finalAbortados);
-            break;
-          } else if (p.getQuantum() == 0) {
-            p.setQuantum(p.getQuantumFinal());
-            p.setQuantidade(p.getQuantidade() + 1);
-            listas.aptosAddProcesso(listas.coreRemoveProcessoCore(i));
-            index = i;
-            break;
+    listas = Listas.getInstance();
+    cores = new Cores(numeroCores);
+    exibirTela(App.painelAptos, listas.aptos);
+
+    cores.insereCoreAll(listas);
+    exibirTela(App.painelAptos, listas.aptos);
+    exibirTela(App.painelExecucao, cores.getCores());
+    while (!cores.coreEstaVazio()) {
+      cores.insereCoreAll(listas);
+      Thread.sleep(1000);
+      cores.decrementaTempo();
+      atualizaPaineis(cores, listas);
+
+      for (int i = 0; i < cores.numeroProcessos(); i++) {
+        Processo p = cores.getProcessoCore(i);
+        if (p.getTempoRestante() <= 0) {
+          listas.finalAddProcesso(p);
+          if (!listas.aptosEstaVazio()) {
+            cores.inserirCore(i, listas.aptosRemoveProcesso(0));
+            cores.removeCore(i + 1);
+          } else {
+            p.setTempoRestante(0);
+            cores.removeCore(i);
           }
+        } else if (p.getQuantum() <= 0) {
+          int quantumFinal = p.getQuantumFinal();
+          p.setQuantum(quantumFinal);
+          listas.aptosAddProcesso(p);
+          cores.inserirCore(i, listas.aptosRemoveProcesso(0));
+          cores.removeCore(i + 1);
         }
       }
-      Thread.sleep(500);
+      atualizaPaineis(cores, listas);
     }
-    App.painelExecucao.removeAll();
-    App.painelAptos.doLayout();
-    App.painelExecucao.doLayout();
-    App.painelAptos.repaint();
-    App.painelExecucao.repaint();
   }
 }

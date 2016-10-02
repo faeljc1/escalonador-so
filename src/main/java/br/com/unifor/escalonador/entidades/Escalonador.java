@@ -2,19 +2,19 @@ package br.com.unifor.escalonador.entidades;
 
 import br.com.unifor.escalonador.swing.App;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
-
-import javax.swing.*;
 
 public class Escalonador extends SwingWorker<Void, Void> {
   private static Random random = new Random();
   private Processo processo;
   public static List<Processo> filaProcessos;
 
-  static boolean flag;
+  public static boolean ltg = false;
+
+  public static boolean flag;
 
   private int tipoAlgoritmo;
   private int numeroCores;
@@ -27,17 +27,25 @@ public class Escalonador extends SwingWorker<Void, Void> {
     this.tipoAlgoritmo = App.comboBox.getSelectedIndex();
     this.numeroCores = Integer.parseInt(App.txfNumeroProcessadores.getText());
     this.numeroProcessos = Integer.parseInt(App.txfProcessosIniciais.getText());
-    this.quantum = Integer.parseInt(App.txfQuantum.getText());
     flag = true;
   }
 
   @Override
   protected Void doInBackground() {
     try {
-      criarProcessos();
       switch (tipoAlgoritmo) {
+        case 0:
+          this.ltg = true;
+          criarProcessos();
+          LTG ltg = new LTG();
+          ltg.iniciarAlgoritmo(numeroCores);
+          break;
         case 1:
-          RoundRobin2 rr = new RoundRobin2();
+          this.ltg = false;
+          this.quantum = Integer.parseInt(App.txfQuantum.getText());
+          criarProcessos();
+          System.out.println(quantum);
+          RoundRobin rr = new RoundRobin();
           rr.iniciarAlgoritmo(numeroCores);
           break;
 
@@ -58,23 +66,29 @@ public class Escalonador extends SwingWorker<Void, Void> {
       int deadLine = random.nextInt(17) + 4;
       int quantumAux;
 
-      if (prioridade == 0) {
-        quantumAux = quantum + 3;
-      } else if (prioridade == 1) {
-        quantumAux = quantum + 2;
-      } else if (prioridade == 2) {
-        quantumAux = quantum + 1;
+      if (this.ltg == true) {
+        quantumAux = 0;
+        prioridade = 0;
       } else {
-        quantumAux = quantum;
+        if (prioridade == 0) {
+          quantumAux = quantum + 3;
+        } else if (prioridade == 1) {
+          quantumAux = quantum + 2;
+        } else if (prioridade == 2) {
+          quantumAux = quantum + 1;
+        } else {
+          quantumAux = quantum;
+        }
+        deadLine = 0;
       }
 
-      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0);
+      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, false);
       filaProcessos.add(processo);
       App.identificador++;
     }
   }
 
-  public void ordenaLista() {
+  public static synchronized void ordenaLista() {
     Collections.sort(filaProcessos, new Comparator<Object>() {
       public int compare(Object o1, Object o2) {
         Processo p1 = (Processo) o1;
@@ -91,12 +105,16 @@ public class Escalonador extends SwingWorker<Void, Void> {
           + p.getTempoTotal() + "<br>Tempo Restante: " + p.getTempoRestante() + "<br>DeadLine: "
           + p.getDeadLine() + "<br>Prioridade: " + p.getPrioridade() + "<br>Quantidade: " + p.getQuantidade() + "</body></html>");
 
-      if (p.getPrioridade() == 0) {
+      if (ltg == false) {
+        if (p.getPrioridade() == 0) {
+          lblProcesso.setForeground(Color.red);
+        } else if (p.getPrioridade() == 1) {
+          lblProcesso.setForeground(Color.blue);
+        } else if (p.getPrioridade() == 2) {
+          lblProcesso.setForeground(Color.orange);
+        }
+      } else if (p.isAbortados() == true) {
         lblProcesso.setForeground(Color.red);
-      } else if (p.getPrioridade() == 1) {
-        lblProcesso.setForeground(Color.blue);
-      } else if (p.getPrioridade() == 2) {
-        lblProcesso.setForeground(Color.orange);
       }
       painel.add(lblProcesso);
       painel.doLayout();
@@ -104,5 +122,11 @@ public class Escalonador extends SwingWorker<Void, Void> {
     }
     painel.doLayout();
     painel.repaint();
+  }
+
+  public synchronized void atualizaPaineis(Cores cores, Listas listas) {
+    exibirTela(App.painelExecucao, cores.getCores());
+    exibirTela(App.painelAptos, listas.aptos);
+    exibirTela(App.painelAbortados, listas.finalAbortados);
   }
 }

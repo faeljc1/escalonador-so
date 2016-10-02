@@ -65,4 +65,24 @@ public class Cores {
       return false;
     }
   }
+
+  public synchronized void insereCoreAll(Listas listas) {
+    while (!coreCheio() && !listas.aptosEstaVazio()) {
+      inserirCore(listas.aptosRemoveProcesso(0));
+    }
+  }
+
+  public synchronized void decrementaTempoLtg(Listas lista) {
+    if (!cores.isEmpty()) {
+      for (int i = 0; i < cores.size(); i++) {
+        Processo p = cores.get(i);
+        int tempoRestante = p.getTempoRestante();
+        p.setTempoRestante(--tempoRestante);
+        if (tempoRestante <= 0) {
+          lista.finalAddProcesso(cores.remove(i));
+        }
+      }
+    }
+  }
+
 }

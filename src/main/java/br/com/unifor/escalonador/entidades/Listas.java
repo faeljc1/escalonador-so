@@ -4,62 +4,52 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Listas {
-  public List<Processo> cores;
-  public List<Processo> aptos1;
-  private List<Processo> aptos2;
-  private List<Processo> aptos3;
-  private List<Processo> aptos4;
+  public List<Processo> aptos;
   public List<Processo> finalAbortados;
   private static Listas uniqueInstance = new Listas();
 
   private Listas() {
-    cores = new LinkedList<>();
     finalAbortados = new LinkedList<>();
-    aptos1 = Escalonador.filaProcessos;
+    aptos = Escalonador.filaProcessos;
+  }
+
+  public synchronized void decrementaDeadLine() {
+    if (!aptos.isEmpty()) {
+      for (int i = 0; i < aptos.size(); i++) {
+        Processo p = aptos.get(i);
+        int deadLine = p.getDeadLine();
+        p.setDeadLine(--deadLine);
+        if (deadLine <= 0) {
+          p.setAbortados(true);
+          finalAbortados.add(aptos.remove(i));
+          ;
+        }
+      }
+    }
   }
 
   public static Listas getInstance() {
     return uniqueInstance;
   }
 
-  public synchronized void coreAddProcesso(int index, Processo p) {
-    cores.add(index, p);
-  }
-
-  public synchronized Processo coreGetProcesso(int i) {
-    return cores.get(i);
-  }
-
-  public synchronized Processo coreRemoveProcessoCore(int i) {
-    return cores.remove(i);
-  }
-
-  public synchronized boolean coreEstaVazio() {
-    return cores.isEmpty();
-  }
-
-  public synchronized int coreTamanho() {
-    return cores.size();
-  }
-
   public synchronized void aptosAddProcesso(Processo p) {
-    aptos1.add(p);
+    aptos.add(p);
   }
 
   public synchronized Processo aptosGetProcesso(int i) {
-    return aptos1.get(i);
+    return aptos.get(i);
   }
 
   public synchronized Processo aptosRemoveProcesso(int i) {
-    return aptos1.remove(i);
+    return aptos.remove(i);
   }
 
   public synchronized boolean aptosEstaVazio() {
-    return aptos1.isEmpty();
+    return aptos.isEmpty();
   }
 
   public synchronized int aptosTamanho() {
-    return aptos1.size();
+    return aptos.size();
   }
 
   public synchronized void finalAddProcesso(Processo p) {
