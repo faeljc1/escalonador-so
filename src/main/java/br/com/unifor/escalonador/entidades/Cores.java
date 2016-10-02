@@ -43,13 +43,29 @@ public class Cores {
     return cores;
   }
 
-  public synchronized void decrementaTempo() {
+  public synchronized void decrementaTempo(Listas lista) {
     if (!cores.isEmpty()) {
-      for (Processo p : cores) {
+      for (int i = 0; i < cores.size(); i++) {
+        Processo p = cores.get(i);
         int tempoRestante = p.getTempoRestante();
         p.setTempoRestante(--tempoRestante);
         int quantum = p.getQuantum();
         p.setQuantum(--quantum);
+        if (tempoRestante <= 0) {
+          lista.finalAddProcesso(p);
+          if (!lista.aptosEstaVazio()) {
+            cores.remove(i);
+            cores.add(i, lista.aptosRemoveProcesso(0));
+          } else {
+            cores.remove(i);
+          }
+        } else if (quantum <= 0) {
+          int quantumFinal = p.getQuantumFinal();
+          p.setQuantum(quantumFinal);
+          lista.aptosAddProcesso(p);
+          cores.remove(i);
+          cores.add(i, lista.aptosRemoveProcesso(0));
+        }
       }
     }
   }

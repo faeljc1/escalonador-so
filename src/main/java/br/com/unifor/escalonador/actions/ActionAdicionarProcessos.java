@@ -31,7 +31,9 @@ public class ActionAdicionarProcessos implements ActionListener {
     Processo processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantum, quantum, deadLine, 0, false);
     App.identificador++;
     listas.aptosAddProcesso(processo);
-    Escalonador.ordenaLista();
+    if (Escalonador.ltg == true) {
+      Escalonador.ordenaLista();
+    }
     try {
       Thread.sleep(250);
     } catch (InterruptedException e1) {

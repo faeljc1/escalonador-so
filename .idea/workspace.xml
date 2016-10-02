@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90e34264-4938-4ca6-8581-e79e69647b2a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/LTG$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/RoundRobin2.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Escalonador$1.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Escalonador$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Escalonador.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Escalonador.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/LTG.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/LTG.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Cores.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Cores.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Listas.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/Listas.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/RoundRobin.class" afterPath="$PROJECT_DIR$/target/classes/br/com/unifor/escalonador/entidades/RoundRobin.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/LTG.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/LTG.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin2.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java" />
     </list>
     <ignored path="EscalonadorSO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,8 +48,8 @@
       <file leaf-file-name="Listas.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="46" />
+            <state relative-caret-position="212">
+              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -65,8 +58,8 @@
       <file leaf-file-name="Cores.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+            <state relative-caret-position="68">
+              <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#510#511#0" expanded="true" />
@@ -76,24 +69,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionAdicionarProcessos.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ActionAdicionarProcessos.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="476">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Escalonador.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="90" column="15" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -101,35 +82,19 @@
       <file leaf-file-name="RoundRobin.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+            <state relative-caret-position="119">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LTG.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LTG.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/LTG.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="170">
               <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Processo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
-              <folding>
-                <element signature="e#856#857#0" expanded="true" />
-                <element signature="e#883#884#0" expanded="true" />
-                <element signature="e#2054#2055#0" expanded="true" />
-                <element signature="e#2103#2104#0" expanded="true" />
-                <element signature="e#2139#2140#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -171,13 +136,13 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Tempo.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/swing/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin2.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/LTG.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java" />
       </list>
     </option>
   </component>
@@ -867,12 +832,12 @@
       <workItem from="1475197551932" duration="5665000" />
       <workItem from="1475237149221" duration="176000" />
       <workItem from="1475246505949" duration="14044000" />
-      <workItem from="1475346135823" duration="8175000" />
+      <workItem from="1475346135823" duration="10231000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57491000" />
+    <option name="totallyTimeSpent" value="59547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -887,7 +852,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32626426" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251634" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -947,13 +912,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java</url>
-          <line>72</line>
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java</url>
+          <line>34</line>
           <properties />
-          <option name="timeStamp" value="46" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="47" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1007,6 +972,7 @@
           <folding>
             <element signature="e#856#857#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
             <element signature="e#2054#2055#0" expanded="true" />
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2139#2140#0" expanded="true" />
@@ -1093,6 +1059,7 @@
           <folding>
             <element signature="e#856#857#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
             <element signature="e#2054#2055#0" expanded="true" />
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2139#2140#0" expanded="true" />
@@ -1159,6 +1126,7 @@
           <folding>
             <element signature="e#856#857#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
             <element signature="e#2054#2055#0" expanded="true" />
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2139#2140#0" expanded="true" />
@@ -1217,6 +1185,7 @@
           <folding>
             <element signature="e#856#857#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
             <element signature="e#2054#2055#0" expanded="true" />
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2139#2140#0" expanded="true" />
@@ -1339,11 +1308,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Processo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+        <state relative-caret-position="145">
+          <caret line="91" column="2" selection-start-line="91" selection-start-column="2" selection-end-line="91" selection-end-column="2" />
           <folding>
             <element signature="e#856#857#0" expanded="true" />
             <element signature="e#883#884#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
             <element signature="e#2054#2055#0" expanded="true" />
             <element signature="e#2103#2104#0" expanded="true" />
             <element signature="e#2139#2140#0" expanded="true" />
@@ -1351,18 +1321,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="-289">
+          <caret line="86" column="26" selection-start-line="86" selection-start-column="26" selection-end-line="86" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+        <state relative-caret-position="68">
+          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#510#511#0" expanded="true" />
@@ -1373,34 +1345,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Listas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="46" />
+        <state relative-caret-position="212">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/RoundRobin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/LTG.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="170">
           <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="90" column="15" selection-start-line="90" selection-start-column="15" selection-end-line="90" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/actions/ActionAdicionarProcessos.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
