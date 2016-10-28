@@ -32,6 +32,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
 
   @Override
   protected Void doInBackground() {
+    estadoIniciar();
     try {
       switch (tipoAlgoritmo) {
         case 0:
@@ -55,6 +56,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    estadoFinalizou();
     return null;
   }
 
@@ -103,7 +105,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     for (Processo p : lista) {
       lblProcesso = new JLabel("<html><body>Processo: " + p.getIdentificador() + "<br>Tempo Total: "
           + p.getTempoTotal() + "<br>Tempo Restante: " + p.getTempoRestante() + "<br>DeadLine: "
-          + p.getDeadLine() + "<br>Prioridade: " + p.getPrioridade() + "<br>Quantidade: " + p.getQuantidade() + "</body></html>");
+          + p.getDeadLine() + "<br>Prioridade: " + p.getPrioridade() + "</body></html>");
 
       if (ltg == false) {
         if (p.getPrioridade() == 0) {
@@ -128,5 +130,19 @@ public class Escalonador extends SwingWorker<Void, Void> {
     exibirTela(App.painelExecucao, cores.getCores());
     exibirTela(App.painelAptos, listas.aptos);
     exibirTela(App.painelAbortados, listas.finalAbortados);
+  }
+
+  public void estadoIniciar() {
+    App.btnIniciar.setEnabled(false);
+    App.txfQuantum.setEnabled(false);
+    App.txfProcessosIniciais.setEnabled(false);
+    App.txfNumeroProcessadores.setEnabled(false);
+  }
+
+  public void estadoFinalizou() {
+    App.btnIniciar.setEnabled(true);
+    App.txfQuantum.setEnabled(true);
+    App.txfProcessosIniciais.setEnabled(true);
+    App.txfNumeroProcessadores.setEnabled(true);
   }
 }

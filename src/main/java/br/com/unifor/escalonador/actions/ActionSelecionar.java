@@ -14,9 +14,12 @@ public class ActionSelecionar implements ActionListener {
     App.btnParar.setEnabled(true);
     App.btnAdicionarProcessos.setEnabled(true);
     App.txfProcessosIniciais.setEditable(true);
-    //App.txfNumeroProcessadores.setEditable(true);
-    App.txfQuantum.setEditable(true);
     App.txfProcessosIniciais.setFocusable(true);
+    if (App.comboBox.getSelectedIndex() == 0) {
+      App.txfQuantum.setEditable(false);
+    } else {
+      App.txfQuantum.setEditable(true);
+    }
     App.txfProcessosIniciais.requestFocus();
   }
 
