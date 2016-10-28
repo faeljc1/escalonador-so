@@ -20,6 +20,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
   private int numeroCores;
   private int numeroProcessos;
   private int quantum;
+  private long memoria;
 
   private JLabel lblProcesso;
 
@@ -27,6 +28,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     this.tipoAlgoritmo = App.comboBox.getSelectedIndex();
     this.numeroCores = Integer.parseInt(App.txfNumeroProcessadores.getText());
     this.numeroProcessos = Integer.parseInt(App.txfProcessosIniciais.getText());
+    this.memoria = Long.parseLong(App.txfMemoria.getText());
     flag = true;
   }
 
@@ -47,7 +49,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
           criarProcessos();
           System.out.println(quantum);
           RoundRobin rr = new RoundRobin();
-          rr.iniciarAlgoritmo(numeroCores);
+          rr.iniciarAlgoritmo(numeroCores, memoria);
           break;
 
         default:
@@ -67,6 +69,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
       int prioridade = random.nextInt(4);
       int deadLine = random.nextInt(17) + 4;
       int quantumAux;
+      int tamanhoSetor = (int) Math.pow(2, random.nextInt(3) + 5);
 
       if (this.ltg == true) {
         quantumAux = 0;
@@ -84,7 +87,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
         deadLine = 0;
       }
 
-      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, false);
+      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, tamanhoSetor, false);
       filaProcessos.add(processo);
       App.identificador++;
     }
@@ -126,7 +129,22 @@ public class Escalonador extends SwingWorker<Void, Void> {
     painel.repaint();
   }
 
+  public synchronized void exibirMemoria(JPanel painel) {
+    painel.removeAll();
+    for (Setor s : Memoria.listaMemoria) {
+      lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memoria Processo: "
+          + s.getProcesso().getTamanhoMemoria() + "<br>Memoria Setor: " + s.getTamanhoSetor() + "</body></html>");
+
+      painel.add(lblProcesso);
+      painel.doLayout();
+      painel.repaint();
+    }
+    painel.doLayout();
+    painel.repaint();
+  }
+
   public synchronized void atualizaPaineis(Cores cores, Listas listas) {
+    exibirMemoria(App.painelMemoria);
     exibirTela(App.painelExecucao, cores.getCores());
     exibirTela(App.painelAptos, listas.aptos);
     exibirTela(App.painelAbortados, listas.finalAbortados);
@@ -137,6 +155,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfQuantum.setEnabled(false);
     App.txfProcessosIniciais.setEnabled(false);
     App.txfNumeroProcessadores.setEnabled(false);
+    App.txfMemoria.setEnabled(false);
   }
 
   public void estadoFinalizou() {
@@ -144,5 +163,6 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfQuantum.setEnabled(true);
     App.txfProcessosIniciais.setEnabled(true);
     App.txfNumeroProcessadores.setEnabled(true);
+    App.txfMemoria.setEnabled(true);
   }
 }

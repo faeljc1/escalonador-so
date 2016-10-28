@@ -19,6 +19,7 @@ public class ActionAdicionarProcessos implements ActionListener {
     int tempoTotal = random.nextInt(10) + 4;
     int prioridade = random.nextInt(4);
     int deadLine = random.nextInt(17) + 4;
+    int tamanhoSetor = (int) Math.pow(2, random.nextInt(10) + 1);
 
     if (Escalonador.ltg == true) {
       quantum = 0;
@@ -28,7 +29,7 @@ public class ActionAdicionarProcessos implements ActionListener {
       deadLine = 0;
     }
 
-    Processo processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantum, quantum, deadLine, 0, false);
+    Processo processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantum, quantum, deadLine, 0, tamanhoSetor, false);
     App.identificador++;
     listas.aptosAddProcesso(processo);
     if (Escalonador.ltg == true) {

@@ -1,10 +1,13 @@
 package br.com.unifor.escalonador.swing;
 
 import br.com.unifor.escalonador.entidades.Memoria;
+import br.com.unifor.escalonador.entidades.Processo;
+
+import java.util.Random;
 
 public class Teste {
   public static void main(String[] args) {
-    Memoria memoria = new Memoria(512);
+    /*Memoria memoria = new Memoria(512);
     memoria.criaSetor(64, "A");
     memoria.criaSetor(32, "B");
     memoria.criaSetor(32, "C");
@@ -27,7 +30,12 @@ public class Teste {
 
     memoria.addElemento(32, "X");
 
-    System.out.println(memoria.existeSetorVazio(32));
+    System.out.println(memoria.existeSetorVazio(32));*/
 
+    /*Random random = new Random();
+    for (int i = 0; i < 30; i++) {
+      int x = (int) Math.pow(2, random.nextInt(3) + 5);
+      System.out.print(x + " ");
+    }*/
   }
 }

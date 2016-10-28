@@ -6,9 +6,13 @@ import java.util.List;
 public class Cores {
   private static List<Processo> cores = new LinkedList<>();
   private int quantidadeCores;
+  private long tamanhoMemoria;
+  private Memoria memoria;
 
-  public Cores(int numeroCores) {
+  public Cores(int numeroCores, long tamanhoMemoria) {
     this.quantidadeCores = numeroCores;
+    this.tamanhoMemoria = tamanhoMemoria;
+    memoria = new Memoria(tamanhoMemoria);
   }
 
   public synchronized boolean coreCheio() {
@@ -84,8 +88,18 @@ public class Cores {
 
   public synchronized void insereCoreAll(Listas listas) {
     while (!coreCheio() && !listas.aptosEstaVazio()) {
-      inserirCore(listas.aptosRemoveProcesso(0));
+      Processo p = listas.aptosRemoveProcesso(0);
+      if (memoria.existeExpaco(p.getTamanhoMemoria())) {
+        memoria.criaSetor(p.getTamanhoMemoria(), p);
+        inserirCore(p);
+      } else if (memoria.existeSetorVazio(p.getTamanhoMemoria())) {
+        memoria.addElemento(p.getTamanhoMemoria(), p);
+        inserirCore(p);
+      } else {
+        listas.finalAddProcesso(p);
+      }
     }
+
   }
 
   public synchronized void decrementaTempoLtg(Listas lista) {

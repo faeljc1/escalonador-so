@@ -6,12 +6,13 @@ public class RoundRobin extends Escalonador {
   private static Listas listas;
   private static Cores cores;
 
-  public synchronized void iniciarAlgoritmo(int numeroCores) throws InterruptedException {
+  public synchronized void iniciarAlgoritmo(int numeroCores, long memoria) throws InterruptedException {
     listas = Listas.getInstance();
-    cores = new Cores(numeroCores);
+    cores = new Cores(numeroCores, memoria);
     exibirTela(App.painelAptos, listas.aptos);
 
     cores.insereCoreAll(listas);
+    exibirMemoria(App.painelMemoria);
     exibirTela(App.painelAptos, listas.aptos);
     exibirTela(App.painelExecucao, cores.getCores());
 
@@ -21,5 +22,6 @@ public class RoundRobin extends Escalonador {
       cores.decrementaTempo(listas);
       atualizaPaineis(cores, listas);
     }
+    atualizaPaineis(cores, listas);
   }
 }

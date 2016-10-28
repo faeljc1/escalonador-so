@@ -1,3 +1,4 @@
+/*
 package br.com.unifor.escalonador.actions;
 
 
@@ -6,9 +7,11 @@ import br.com.unifor.escalonador.swing.App;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+*/
 /**
  * Created by rafael on 08/09/2016.
- */
+ *//*
+
 public class ActionTextFiled implements KeyListener {
   public void keyTyped(KeyEvent e) {
 
@@ -28,3 +31,4 @@ public class ActionTextFiled implements KeyListener {
     }
   }
 }
+*/

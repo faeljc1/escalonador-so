@@ -7,7 +7,7 @@ public class Memoria {
   private long totalTamanho;
   private int indice;
 
-  private static List<Setor> listaMemoria = new LinkedList<>();
+  public static List<Setor> listaMemoria = new LinkedList<>();
   private static List<IndiceSetor> setoresVazios = new ArrayList<>();
 
   public Memoria(long tamanho) {
@@ -16,8 +16,8 @@ public class Memoria {
     indice = 0;
   }
 
-  public synchronized void criaSetor(long tamanhoSetor, Object elemento) {
-    if (existeExpaco()) {
+  public synchronized void criaSetor(long tamanhoSetor, Processo elemento) {
+    if (existeExpaco(tamanhoSetor)) {
       Setor s = new Setor(tamanhoSetor, elemento, null, null);
       listaMemoria.add(indice, s);
       indice++;
@@ -25,22 +25,22 @@ public class Memoria {
     }
   }
 
-  public synchronized void addElemento(long tamanhoSetor, Object elemento) {
+  public synchronized void addElemento(long tamanhoSetor, Processo elemento) {
     ordenaSetoresVazios();
     for (IndiceSetor is : setoresVazios) {
       if (is.getSetor().getTamanhoSetor() >= tamanhoSetor) {
-        listaMemoria.get(is.getIndiceSetor()).setElemento(elemento);
+        listaMemoria.get(is.getIndiceSetor()).setProcesso(elemento);
         break;
       }
     }
   }
 
-  public synchronized Object removeElemento(Object elemento) {
+  public synchronized Processo removeElemento(Processo elemento) {
     for (int i = 0; i < listaMemoria.size(); i++) {
       Setor s = listaMemoria.get(i);
-      if (s.getElemento().equals(elemento)) {
-        Object aux = s.getElemento();
-        s.setElemento(null);
+      if (s.getProcesso().equals(elemento)) {
+        Processo aux = s.getProcesso();
+        s.setProcesso(null);
         return aux;
       }
     }
@@ -51,8 +51,8 @@ public class Memoria {
     return tamanho;
   }
 
-  public synchronized boolean existeExpaco() {
-    if (this.totalTamanho < this.tamanho) {
+  public synchronized boolean existeExpaco(long tamanhoSetor) {
+    if (this.totalTamanho < this.tamanho && tamanhoSetor <= (totalTamanho - tamanho)) {
       return true;
     } else {
       return false;
@@ -62,7 +62,7 @@ public class Memoria {
   public synchronized boolean existeSetorVazio(long tamanhoSetor) {
     for (int i = 0; i < listaMemoria.size(); i++) {
       Setor s = listaMemoria.get(i);
-      if (s.getElemento() == null && s.getTamanhoSetor() == tamanhoSetor) {
+      if (s.getProcesso() == null && s.getTamanhoSetor() >= tamanhoSetor) {
         return true;
       }
     }
@@ -73,7 +73,7 @@ public class Memoria {
     setoresVazios = new ArrayList<>();
     for (int i = 0; i < listaMemoria.size(); i++) {
       Setor s = listaMemoria.get(i);
-      if (s.getElemento() == null) {
+      if (s.getProcesso() == null) {
         IndiceSetor is = new IndiceSetor(i, s);
         setoresVazios.add(is);
       }
@@ -85,35 +85,5 @@ public class Memoria {
         return p1.getSetor().getTamanhoSetor() < p2.getSetor().getTamanhoSetor() ? -1 : (p1.getSetor().getTamanhoSetor() > p2.getSetor().getTamanhoSetor() ? +1 : 0);
       }
     });
-  }
-}
-
-class IndiceSetor {
-  private int indiceSetor;
-  private Setor setor;
-
-  public IndiceSetor(int indiceSetor, Setor setor) {
-    this.indiceSetor = indiceSetor;
-    this.setor = setor;
-  }
-
-  public IndiceSetor() {
-
-  }
-
-  public int getIndiceSetor() {
-    return indiceSetor;
-  }
-
-  public void setIndiceSetor(int indiceSetor) {
-    this.indiceSetor = indiceSetor;
-  }
-
-  public Setor getSetor() {
-    return setor;
-  }
-
-  public void setSetor(Setor setor) {
-    this.setor = setor;
   }
 }

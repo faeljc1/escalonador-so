@@ -2,18 +2,18 @@ package br.com.unifor.escalonador.entidades;
 
 public class Setor {
   private final long tamanhoSetor;
-  private Object elemento;
+  private Processo processo;
   private Setor proximo;
 
-  public Setor(long tamanhoSetor, Object elemento, Setor proximo, Setor anterior) {
+  public Setor(long tamanhoSetor, Processo processo, Setor proximo, Setor anterior) {
     this.tamanhoSetor = tamanhoSetor;
-    this.elemento = elemento;
+    this.processo = processo;
     this.proximo = proximo;
   }
 
-  public Setor(long tamanhoSetor, Object elemento) {
+  public Setor(long tamanhoSetor, Processo elemento) {
     this.tamanhoSetor = tamanhoSetor;
-    this.elemento = elemento;
+    this.processo = elemento;
     this.proximo = null;
   }
 
@@ -21,19 +21,15 @@ public class Setor {
     return tamanhoSetor;
   }
 
-  public Object getElemento() {
-    return elemento;
-  }
-
-  public void setElemento(Object elemento) {
-    this.elemento = elemento;
-  }
-
   public Setor getProximo() {
     return proximo;
   }
 
-  public void setProximo(Setor proximo) {
-    this.proximo = proximo;
+  public Processo getProcesso() {
+    return processo;
+  }
+
+  public void setProcesso(Processo processo) {
+    this.processo = processo;
   }
 }

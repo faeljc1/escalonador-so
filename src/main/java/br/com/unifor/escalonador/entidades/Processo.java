@@ -9,10 +9,11 @@ public class Processo {
   private int quantum;
   private int deadLine;
   private int quantidade;
+  private long tamanhoMemoria;
   private boolean abortados;
 
   public Processo(int identificador, int tempoTotal, int tempoRestante, int prioridade, int quantum,
-                  int quantumFinal, int deadLine, int quantidade, boolean abortados) {
+                  int quantumFinal, int deadLine, int quantidade, long tamanhoMemoria, boolean abortados) {
     super();
     this.identificador = identificador;
     this.tempoTotal = tempoTotal;
@@ -22,6 +23,7 @@ public class Processo {
     this.quantumFinal = quantumFinal;
     this.deadLine = deadLine;
     this.quantidade = quantidade;
+    this.tamanhoMemoria = tamanhoMemoria;
     this.abortados = abortados;
   }
 
@@ -87,6 +89,14 @@ public class Processo {
 
   public void setQuantum(int quantum) {
     this.quantum = quantum;
+  }
+
+  public long getTamanhoMemoria() {
+    return tamanhoMemoria;
+  }
+
+  public void setTamanhoMemoria(long tamanhoMemoria) {
+    this.tamanhoMemoria = tamanhoMemoria;
   }
 
   public boolean isAbortados() {

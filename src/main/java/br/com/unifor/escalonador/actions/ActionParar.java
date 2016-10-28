@@ -16,6 +16,7 @@ public class ActionParar implements ActionListener {
     App.btnAdicionarProcessos.setEnabled(false);
     App.txfProcessosIniciais.setEditable(false);
     App.txfNumeroProcessadores.setEditable(false);
+    App.txfMemoria.setEditable(false);
     App.txfQuantum.setEditable(false);
 
     App.txfProcessosIniciais.setText("");
