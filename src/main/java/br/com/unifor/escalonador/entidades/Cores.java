@@ -103,7 +103,6 @@ public class Cores {
         listas.finalAddProcesso(p);
       }
     }
-
   }
 
   public synchronized void decrementaTempoLtg(Listas lista) {
@@ -128,6 +127,4 @@ public class Cores {
       cores.add(i, aux);
     }
   }
-
-
 }
