@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class Escalonador extends SwingWorker<Void, Void> {
   private static Random random = new Random();
@@ -60,6 +61,41 @@ public class Escalonador extends SwingWorker<Void, Void> {
     }
     estadoFinalizou();
     return null;
+  }
+
+  protected void done() {
+    try {
+      estadoParou();
+      /*App.painelAbortados.removeAll();
+      App.painelAptos.removeAll();
+      App.painelExecucao.removeAll();
+      App.painelMemoria.removeAll();
+
+      App.painelAbortados.doLayout();
+      App.painelAbortados.repaint();
+      App.painelAptos.doLayout();
+      App.painelAptos.repaint();
+      App.painelExecucao.doLayout();
+      App.painelExecucao.repaint();
+      App.painelMemoria.doLayout();
+      App.painelMemoria.repaint();*/
+
+      // Descobre como está o processo. É responsável por lançar
+      // as exceptions
+      get();
+
+    } catch (ExecutionException e) {
+      e.printStackTrace();
+      final String msg = String.format("Processo de Escalonamento abortado! \n %s", e.getCause().toString());
+      SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+          JOptionPane.showMessageDialog(null, msg, "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+      });
+    } catch (InterruptedException e) {
+      System.out.println("Processo foi abortado");
+    }
   }
 
   private void criarProcessos() {
@@ -132,12 +168,14 @@ public class Escalonador extends SwingWorker<Void, Void> {
   public synchronized void exibirMemoria(JPanel painel) {
     painel.removeAll();
     for (Setor s : Memoria.listaMemoria) {
-      lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memoria Processo: "
-          + s.getProcesso().getTamanhoMemoria() + "<br>Memoria Setor: " + s.getTamanhoSetor() + "</body></html>");
+      if (s.getProcesso() != null) {
+        lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memoria Processo: "
+            + s.getProcesso().getTamanhoMemoria() + "<br>Memoria Setor: " + s.getTamanhoSetor() + "</body></html>");
 
-      painel.add(lblProcesso);
-      painel.doLayout();
-      painel.repaint();
+        painel.add(lblProcesso);
+        painel.doLayout();
+        painel.repaint();
+      }
     }
     painel.doLayout();
     painel.repaint();
@@ -164,5 +202,23 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfProcessosIniciais.setEnabled(true);
     App.txfNumeroProcessadores.setEnabled(true);
     App.txfMemoria.setEnabled(true);
+  }
+
+  public void estadoParou() {
+    App.btnSelecionar.setEnabled(true);
+    App.comboBox.setEnabled(true);
+    App.btnIniciar.setEnabled(false);
+    App.btnParar.setEnabled(false);
+
+    App.btnAdicionarProcessos.setEnabled(false);
+    App.txfProcessosIniciais.setEditable(false);
+    App.txfNumeroProcessadores.setEditable(false);
+    App.txfMemoria.setEditable(false);
+    App.txfQuantum.setEditable(false);
+
+    App.txfProcessosIniciais.setText("");
+    App.txfNumeroProcessadores.setText("");
+    App.txfQuantum.setText("");
+    App.txfMemoria.setText("");
   }
 }

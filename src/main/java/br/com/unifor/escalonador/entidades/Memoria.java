@@ -30,6 +30,7 @@ public class Memoria {
     for (IndiceSetor is : setoresVazios) {
       if (is.getSetor().getTamanhoSetor() >= tamanhoSetor) {
         listaMemoria.get(is.getIndiceSetor()).setProcesso(elemento);
+        listaMemoria.get(is.getIndiceSetor()).getProcesso().setTamanhoMemoria(tamanhoSetor);
         break;
       }
     }
@@ -38,7 +39,7 @@ public class Memoria {
   public synchronized Processo removeElemento(Processo elemento) {
     for (int i = 0; i < listaMemoria.size(); i++) {
       Setor s = listaMemoria.get(i);
-      if (s.getProcesso().equals(elemento)) {
+      if (s.getProcesso() != null && s.getProcesso().equals(elemento)) {
         Processo aux = s.getProcesso();
         s.setProcesso(null);
         return aux;
@@ -52,7 +53,7 @@ public class Memoria {
   }
 
   public synchronized boolean existeExpaco(long tamanhoSetor) {
-    if (this.totalTamanho < this.tamanho && tamanhoSetor <= (totalTamanho - tamanho)) {
+    if (this.totalTamanho < this.tamanho && tamanhoSetor <= (tamanho - totalTamanho)) {
       return true;
     } else {
       return false;

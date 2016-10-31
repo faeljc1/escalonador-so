@@ -57,18 +57,22 @@ public class Cores {
         p.setQuantum(--quantum);
         if (tempoRestante <= 0) {
           lista.finalAddProcesso(p);
+          memoria.removeElemento(p);
           if (!lista.aptosEstaVazio()) {
             cores.remove(i);
-            cores.add(i, lista.aptosRemoveProcesso(0));
+            Processo aux = lista.aptosRemoveProcesso(0);
+            addMemoria(aux, i);
           } else {
             cores.remove(i);
           }
         } else if (quantum <= 0) {
           int quantumFinal = p.getQuantumFinal();
           p.setQuantum(quantumFinal);
+          memoria.removeElemento(p);
           lista.aptosAddProcesso(p);
           cores.remove(i);
-          cores.add(i, lista.aptosRemoveProcesso(0));
+          Processo aux = lista.aptosRemoveProcesso(0);
+          addMemoria(aux, i);
         }
       }
     }
@@ -114,5 +118,16 @@ public class Cores {
       }
     }
   }
+
+  public synchronized void addMemoria(Processo aux, int i) {
+    if (memoria.existeExpaco(aux.getTamanhoMemoria())) {
+      memoria.criaSetor(aux.getTamanhoMemoria(), aux);
+      cores.add(i, aux);
+    } else if (memoria.existeSetorVazio(aux.getTamanhoMemoria())) {
+      memoria.addElemento(aux.getTamanhoMemoria(), aux);
+      cores.add(i, aux);
+    }
+  }
+
 
 }

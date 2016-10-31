@@ -22,6 +22,7 @@ public class ActionParar implements ActionListener {
     App.txfProcessosIniciais.setText("");
     App.txfNumeroProcessadores.setText("");
     App.txfQuantum.setText("");
+    App.txfMemoria.setText("");
 
     App.painelAptos.removeAll();
     App.painelAptos.doLayout();

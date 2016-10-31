@@ -21,15 +21,19 @@ public class Setor {
     return tamanhoSetor;
   }
 
-  public Setor getProximo() {
-    return proximo;
-  }
-
   public Processo getProcesso() {
     return processo;
   }
 
   public void setProcesso(Processo processo) {
     this.processo = processo;
+  }
+
+  public Setor getProximo() {
+    return proximo;
+  }
+
+  public void setProximo(Setor proximo) {
+    this.proximo = proximo;
   }
 }
