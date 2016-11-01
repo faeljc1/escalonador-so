@@ -1,6 +1,9 @@
 package br.com.unifor.escalonador.swing;
 
-import br.com.unifor.escalonador.actions.*;
+import br.com.unifor.escalonador.actions.ActionAdicionarProcessos;
+import br.com.unifor.escalonador.actions.ActionIniciar;
+import br.com.unifor.escalonador.actions.ActionParar;
+import br.com.unifor.escalonador.actions.ActionSelecionar;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

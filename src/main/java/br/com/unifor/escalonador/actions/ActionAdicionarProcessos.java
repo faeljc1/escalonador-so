@@ -19,7 +19,7 @@ public class ActionAdicionarProcessos implements ActionListener {
     int tempoTotal = random.nextInt(10) + 4;
     int prioridade = random.nextInt(4);
     int deadLine = random.nextInt(17) + 4;
-    int tamanhoSetor = (int) Math.pow(2, random.nextInt(10) + 1);
+    int tamanhoSetor = (int) Math.pow(2, random.nextInt(3) + 5);
 
     if (Escalonador.ltg == true) {
       quantum = 0;

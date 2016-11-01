@@ -7,8 +7,8 @@ public class Memoria {
   private long totalTamanho;
   private int indice;
 
-  public static List<Setor> listaMemoria = new LinkedList<>();
-  private static List<IndiceSetor> setoresVazios = new ArrayList<>();
+  public static List<Bloco> listaMemoria = new LinkedList<>();
+  private static List<IndiceBloco> blocosVazios = new ArrayList<>();
 
   public Memoria(long tamanho) {
     this.tamanho = tamanho;
@@ -16,21 +16,21 @@ public class Memoria {
     indice = 0;
   }
 
-  public synchronized void criaSetor(long tamanhoSetor, Processo elemento) {
-    if (existeExpaco(tamanhoSetor)) {
-      Setor s = new Setor(tamanhoSetor, elemento, null, null);
+  public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
+    if (existeExpaco(tamanhoBloco)) {
+      Bloco s = new Bloco(tamanhoBloco, elemento, null, null);
       listaMemoria.add(indice, s);
       indice++;
-      totalTamanho += tamanhoSetor;
+      totalTamanho += tamanhoBloco;
     }
   }
 
-  public synchronized void addElemento(long tamanhoSetor, Processo elemento) {
+  public synchronized void addElemento(long tamanhoBloco, Processo elemento) {
     ordenaSetoresVazios();
-    for (IndiceSetor is : setoresVazios) {
-      if (is.getSetor().getTamanhoSetor() >= tamanhoSetor) {
-        listaMemoria.get(is.getIndiceSetor()).setProcesso(elemento);
-        listaMemoria.get(is.getIndiceSetor()).getProcesso().setTamanhoMemoria(tamanhoSetor);
+    for (IndiceBloco is : blocosVazios) {
+      if (is.getSetor().getTamanhoBloco() >= tamanhoBloco) {
+        listaMemoria.get(is.getIndiceBloco()).setProcesso(elemento);
+        listaMemoria.get(is.getIndiceBloco()).getProcesso().setTamanhoMemoria(tamanhoBloco);
         break;
       }
     }
@@ -38,7 +38,7 @@ public class Memoria {
 
   public synchronized Processo removeElemento(Processo elemento) {
     for (int i = 0; i < listaMemoria.size(); i++) {
-      Setor s = listaMemoria.get(i);
+      Bloco s = listaMemoria.get(i);
       if (s.getProcesso() != null && s.getProcesso().equals(elemento)) {
         Processo aux = s.getProcesso();
         s.setProcesso(null);
@@ -52,18 +52,18 @@ public class Memoria {
     return tamanho;
   }
 
-  public synchronized boolean existeExpaco(long tamanhoSetor) {
-    if (this.totalTamanho < this.tamanho && tamanhoSetor <= (tamanho - totalTamanho)) {
+  public synchronized boolean existeExpaco(long tamanhoBloco) {
+    if (this.totalTamanho < this.tamanho && tamanhoBloco <= (tamanho - totalTamanho)) {
       return true;
     } else {
       return false;
     }
   }
 
-  public synchronized boolean existeSetorVazio(long tamanhoSetor) {
+  public synchronized boolean existeSetorVazio(long tamanhoBloco) {
     for (int i = 0; i < listaMemoria.size(); i++) {
-      Setor s = listaMemoria.get(i);
-      if (s.getProcesso() == null && s.getTamanhoSetor() >= tamanhoSetor) {
+      Bloco s = listaMemoria.get(i);
+      if (s.getProcesso() == null && s.getTamanhoBloco() >= tamanhoBloco) {
         return true;
       }
     }
@@ -71,19 +71,19 @@ public class Memoria {
   }
 
   public synchronized void ordenaSetoresVazios() {
-    setoresVazios = new ArrayList<>();
+    blocosVazios = new ArrayList<>();
     for (int i = 0; i < listaMemoria.size(); i++) {
-      Setor s = listaMemoria.get(i);
+      Bloco s = listaMemoria.get(i);
       if (s.getProcesso() == null) {
-        IndiceSetor is = new IndiceSetor(i, s);
-        setoresVazios.add(is);
+        IndiceBloco is = new IndiceBloco(i, s);
+        blocosVazios.add(is);
       }
     }
-    Collections.sort(setoresVazios, new Comparator<Object>() {
+    Collections.sort(blocosVazios, new Comparator<Object>() {
       public int compare(Object o1, Object o2) {
-        IndiceSetor p1 = (IndiceSetor) o1;
-        IndiceSetor p2 = (IndiceSetor) o2;
-        return p1.getSetor().getTamanhoSetor() < p2.getSetor().getTamanhoSetor() ? -1 : (p1.getSetor().getTamanhoSetor() > p2.getSetor().getTamanhoSetor() ? +1 : 0);
+        IndiceBloco p1 = (IndiceBloco) o1;
+        IndiceBloco p2 = (IndiceBloco) o2;
+        return p1.getSetor().getTamanhoBloco() < p2.getSetor().getTamanhoBloco() ? -1 : (p1.getSetor().getTamanhoBloco() > p2.getSetor().getTamanhoBloco() ? +1 : 0);
       }
     });
   }
