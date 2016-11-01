@@ -105,7 +105,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
       int prioridade = random.nextInt(4);
       int deadLine = random.nextInt(17) + 4;
       int quantumAux;
-      int tamanhoSetor = (int) Math.pow(2, random.nextInt(3) + 5);
+      int tamanhoBloco = (int) Math.pow(2, random.nextInt(3) + 5);
 
       if (this.ltg == true) {
         quantumAux = 0;
@@ -123,7 +123,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
         deadLine = 0;
       }
 
-      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, tamanhoSetor, false);
+      processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, tamanhoBloco, false);
       filaProcessos.add(processo);
       App.identificador++;
     }
@@ -146,17 +146,8 @@ public class Escalonador extends SwingWorker<Void, Void> {
           + p.getTempoTotal() + "<br>Tempo Restante: " + p.getTempoRestante() + "<br>DeadLine: "
           + p.getDeadLine() + "<br>Prioridade: " + p.getPrioridade() + "</body></html>");
 
-      if (ltg == false) {
-        if (p.getPrioridade() == 0) {
-          lblProcesso.setForeground(Color.red);
-        } else if (p.getPrioridade() == 1) {
-          lblProcesso.setForeground(Color.blue);
-        } else if (p.getPrioridade() == 2) {
-          lblProcesso.setForeground(Color.orange);
-        }
-      } else if (p.isAbortados() == true) {
-        lblProcesso.setForeground(Color.red);
-      }
+      setaCores(lblProcesso, p);
+
       painel.add(lblProcesso);
       painel.doLayout();
       painel.repaint();
@@ -169,7 +160,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     painel.removeAll();
     for (Bloco s : Memoria.listaMemoria) {
       if (s.getProcesso() != null) {
-        lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memoria Processo: "
+        lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memória Processo: "
             + s.getProcesso().getTamanhoMemoria() + "<br>Bloco Memória: " + s.getTamanhoBloco() + "</body></html>");
 
         painel.add(lblProcesso);
@@ -220,5 +211,23 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfNumeroProcessadores.setText("");
     App.txfQuantum.setText("");
     App.txfMemoria.setText("");
+  }
+
+  public void setaCores(JLabel label, Processo p) {
+    /*if (ltg == false) {
+      if (p.getPrioridade() == 0) {
+        label.setForeground(Color.red);
+      } else if (p.getPrioridade() == 1) {
+        label.setForeground(Color.blue);
+      } else if (p.getPrioridade() == 2) {
+        label.setForeground(Color.orange);
+      }
+    } else if (p.isAbortados() == true) {
+      label.setForeground(Color.red);
+    }*/
+
+    if (p.isAbortados() == true) {
+      label.setForeground(Color.red);
+    }
   }
 }

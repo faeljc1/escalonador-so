@@ -96,10 +96,11 @@ public class Cores {
       if (memoria.existeExpaco(p.getTamanhoMemoria())) {
         memoria.criaSetor(p.getTamanhoMemoria(), p);
         inserirCore(p);
-      } else if (memoria.existeSetorVazio(p.getTamanhoMemoria())) {
+      } else if (memoria.existeBlocoVazio(p.getTamanhoMemoria())) {
         memoria.addElemento(p.getTamanhoMemoria(), p);
         inserirCore(p);
       } else {
+        p.setAbortados(true);
         listas.finalAddProcesso(p);
       }
     }
@@ -122,7 +123,7 @@ public class Cores {
     if (memoria.existeExpaco(aux.getTamanhoMemoria())) {
       memoria.criaSetor(aux.getTamanhoMemoria(), aux);
       cores.add(i, aux);
-    } else if (memoria.existeSetorVazio(aux.getTamanhoMemoria())) {
+    } else if (memoria.existeBlocoVazio(aux.getTamanhoMemoria())) {
       memoria.addElemento(aux.getTamanhoMemoria(), aux);
       cores.add(i, aux);
     }

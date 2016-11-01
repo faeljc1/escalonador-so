@@ -162,7 +162,7 @@ public class App extends JFrame {
     getContentPane().add(painelAptos);
 
     painelAbortados = new JPanel();
-    painelAbortados.setBorder(new TitledBorder(null, "Processos Abortados",
+    painelAbortados.setBorder(new TitledBorder(null, "Processos Finalizados / Abortados",
         TitledBorder.LEADING, TitledBorder.TOP, null, null));
     painelAbortados.setBounds(10, 536, 1352, 165);
     getContentPane().add(painelAbortados);

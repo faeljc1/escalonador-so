@@ -26,7 +26,7 @@ public class Memoria {
   }
 
   public synchronized void addElemento(long tamanhoBloco, Processo elemento) {
-    ordenaSetoresVazios();
+    ordenaBlocosVazios();
     for (IndiceBloco is : blocosVazios) {
       if (is.getSetor().getTamanhoBloco() >= tamanhoBloco) {
         listaMemoria.get(is.getIndiceBloco()).setProcesso(elemento);
@@ -60,7 +60,7 @@ public class Memoria {
     }
   }
 
-  public synchronized boolean existeSetorVazio(long tamanhoBloco) {
+  public synchronized boolean existeBlocoVazio(long tamanhoBloco) {
     for (int i = 0; i < listaMemoria.size(); i++) {
       Bloco s = listaMemoria.get(i);
       if (s.getProcesso() == null && s.getTamanhoBloco() >= tamanhoBloco) {
@@ -70,7 +70,7 @@ public class Memoria {
     return false;
   }
 
-  public synchronized void ordenaSetoresVazios() {
+  public synchronized void ordenaBlocosVazios() {
     blocosVazios = new ArrayList<>();
     for (int i = 0; i < listaMemoria.size(); i++) {
       Bloco s = listaMemoria.get(i);
