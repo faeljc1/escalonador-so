@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Cores {
-  private static List<Processo> cores = new LinkedList<>();
+  public static List<Processo> cores = new LinkedList<>();
   private int quantidadeCores;
   private long tamanhoMemoria;
   private Memoria memoria;
@@ -61,7 +61,7 @@ public class Cores {
           if (!lista.aptosEstaVazio()) {
             cores.remove(i);
             Processo aux = lista.aptosRemoveProcesso(0);
-            addMemoria(aux, i);
+            addMemoria(lista, aux, i);
           } else {
             cores.remove(i);
           }
@@ -72,7 +72,7 @@ public class Cores {
           lista.aptosAddProcesso(p);
           cores.remove(i);
           Processo aux = lista.aptosRemoveProcesso(0);
-          addMemoria(aux, i);
+          addMemoria(lista, aux, i);
         }
       }
     }
@@ -93,16 +93,7 @@ public class Cores {
   public synchronized void insereCoreAll(Listas listas) {
     while (!coreCheio() && !listas.aptosEstaVazio()) {
       Processo p = listas.aptosRemoveProcesso(0);
-      if (memoria.existeExpaco(p.getTamanhoMemoria())) {
-        memoria.criaSetor(p.getTamanhoMemoria(), p);
-        inserirCore(p);
-      } else if (memoria.existeBlocoVazio(p.getTamanhoMemoria())) {
-        memoria.addElemento(p.getTamanhoMemoria(), p);
-        inserirCore(p);
-      } else {
-        p.setAbortados(true);
-        listas.finalAddProcesso(p);
-      }
+      addMemoria(listas, p, null);
     }
   }
 
@@ -119,13 +110,24 @@ public class Cores {
     }
   }
 
-  public synchronized void addMemoria(Processo aux, int i) {
+  public synchronized void addMemoria(Listas lista, Processo aux, Integer i) {
     if (memoria.existeExpaco(aux.getTamanhoMemoria())) {
       memoria.criaSetor(aux.getTamanhoMemoria(), aux);
-      cores.add(i, aux);
+      if (i == null) {
+        inserirCore(aux);
+      } else {
+        cores.add(i, aux);
+      }
     } else if (memoria.existeBlocoVazio(aux.getTamanhoMemoria())) {
       memoria.addElemento(aux.getTamanhoMemoria(), aux);
-      cores.add(i, aux);
+      if (i == null) {
+        inserirCore(aux);
+      } else {
+        cores.add(i, aux);
+      }
+    } else {
+      aux.setAbortados(true);
+      lista.finalAddProcesso(aux);
     }
   }
 }

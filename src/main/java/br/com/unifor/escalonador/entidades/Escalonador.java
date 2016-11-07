@@ -213,7 +213,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfMemoria.setText("");
   }
 
-  public void setaCores(JLabel label, Processo p) {
+  public synchronized void setaCores(JLabel label, Processo p) {
     /*if (ltg == false) {
       if (p.getPrioridade() == 0) {
         label.setForeground(Color.red);

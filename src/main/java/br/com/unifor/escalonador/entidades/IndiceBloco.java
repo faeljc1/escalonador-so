@@ -2,11 +2,11 @@ package br.com.unifor.escalonador.entidades;
 
 public class IndiceBloco {
   private int indiceBloco;
-  private Bloco setor;
+  private Bloco bloco;
 
-  public IndiceBloco(int indiceBloco, Bloco setor) {
+  public IndiceBloco(int indiceBloco, Bloco bloco) {
     this.indiceBloco = indiceBloco;
-    this.setor = setor;
+    this.bloco = bloco;
   }
 
   public IndiceBloco() {
@@ -21,11 +21,11 @@ public class IndiceBloco {
     this.indiceBloco = indiceBloco;
   }
 
-  public Bloco getSetor() {
-    return setor;
+  public Bloco getBloco() {
+    return bloco;
   }
 
-  public void setSetor(Bloco setor) {
-    this.setor = setor;
+  public void setBloco(Bloco bloco) {
+    this.bloco = bloco;
   }
 }

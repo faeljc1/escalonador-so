@@ -8,7 +8,9 @@ public class Memoria {
   private int indice;
 
   public static List<Bloco> listaMemoria = new LinkedList<>();
-  private static List<IndiceBloco> blocosVazios = new ArrayList<>();
+  private static List<List<IndiceBloco>> blocosVazios = new ArrayList<>();
+  private static Map<Long, List<IndiceBloco>> blocoMap = new HashMap<>();
+  private List<IndiceBloco> lista;
 
   public Memoria(long tamanho) {
     this.tamanho = tamanho;
@@ -18,30 +20,58 @@ public class Memoria {
 
   public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
     if (existeExpaco(tamanhoBloco)) {
-      Bloco s = new Bloco(tamanhoBloco, elemento, null, null);
-      listaMemoria.add(indice, s);
+      Bloco b = new Bloco(tamanhoBloco, elemento, null, null);
+      listaMemoria.add(indice, b);
+
+      IndiceBloco ib = new IndiceBloco(indice, b);
+      if (!existeBloco2(tamanhoBloco)) {
+        lista = new LinkedList<>();
+        lista.add(ib);
+        blocoMap.put(tamanhoBloco, lista);
+      } else {
+        lista = blocoMap.get(tamanhoBloco);
+        lista.add(ib);
+      }
+
       indice++;
       totalTamanho += tamanhoBloco;
     }
   }
 
-  public synchronized void addElemento(long tamanhoBloco, Processo elemento) {
-    ordenaBlocosVazios();
-    for (IndiceBloco is : blocosVazios) {
-      if (is.getSetor().getTamanhoBloco() >= tamanhoBloco) {
-        listaMemoria.get(is.getIndiceBloco()).setProcesso(elemento);
-        listaMemoria.get(is.getIndiceBloco()).getProcesso().setTamanhoMemoria(tamanhoBloco);
+  public synchronized void addElemento(long tamanhoBloco, Processo processo) {
+    for (int i = 0; i < listaMemoria.size(); i++) {
+      Bloco bloco = listaMemoria.get(i);
+      if (bloco.getProcesso() == null && bloco.getTamanhoBloco() >= tamanhoBloco) {
+        bloco.setProcesso(processo);
+        bloco.getProcesso().setTamanhoMemoria(tamanhoBloco);
+
+        lista = blocoMap.get(tamanhoBloco);
+        for (IndiceBloco ib : lista) {
+          if (ib.getIndiceBloco() == i) {
+            ib.getBloco().setProcesso(processo);
+            ib.getBloco().getProcesso().setTamanhoMemoria(tamanhoBloco);
+          }
+          break;
+        }
         break;
       }
     }
   }
 
-  public synchronized Processo removeElemento(Processo elemento) {
+  public synchronized Processo removeElemento(Processo processo) {
     for (int i = 0; i < listaMemoria.size(); i++) {
       Bloco s = listaMemoria.get(i);
-      if (s.getProcesso() != null && s.getProcesso().equals(elemento)) {
+      if (s.getProcesso() != null && s.getProcesso().equals(processo)) {
         Processo aux = s.getProcesso();
         s.setProcesso(null);
+
+        lista = blocoMap.get(aux.getTamanhoMemoria());
+        for (IndiceBloco ib : lista) {
+          if (ib.getIndiceBloco() == i) {
+            ib.getBloco().setProcesso(null);
+          }
+          break;
+        }
         return aux;
       }
     }
@@ -70,21 +100,10 @@ public class Memoria {
     return false;
   }
 
-  public synchronized void ordenaBlocosVazios() {
-    blocosVazios = new ArrayList<>();
-    for (int i = 0; i < listaMemoria.size(); i++) {
-      Bloco s = listaMemoria.get(i);
-      if (s.getProcesso() == null) {
-        IndiceBloco is = new IndiceBloco(i, s);
-        blocosVazios.add(is);
-      }
+  public synchronized boolean existeBloco2(long tamanhoBloco) {
+    if (blocoMap.containsKey(tamanhoBloco)) {
+      return true;
     }
-    Collections.sort(blocosVazios, new Comparator<Object>() {
-      public int compare(Object o1, Object o2) {
-        IndiceBloco p1 = (IndiceBloco) o1;
-        IndiceBloco p2 = (IndiceBloco) o2;
-        return p1.getSetor().getTamanhoBloco() < p2.getSetor().getTamanhoBloco() ? -1 : (p1.getSetor().getTamanhoBloco() > p2.getSetor().getTamanhoBloco() ? +1 : 0);
-      }
-    });
+    return false;
   }
 }
