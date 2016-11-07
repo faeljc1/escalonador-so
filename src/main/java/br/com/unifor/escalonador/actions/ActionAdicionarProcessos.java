@@ -2,6 +2,7 @@ package br.com.unifor.escalonador.actions;
 
 import br.com.unifor.escalonador.entidades.Escalonador;
 import br.com.unifor.escalonador.entidades.Listas;
+import br.com.unifor.escalonador.entidades.NumerosRandom;
 import br.com.unifor.escalonador.entidades.Processo;
 import br.com.unifor.escalonador.swing.App;
 
@@ -10,16 +11,16 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class ActionAdicionarProcessos implements ActionListener {
-  private static Random random = new Random();
   private int quantum;
 
   public void actionPerformed(ActionEvent e) {
+    NumerosRandom random = new NumerosRandom();
     App.btnAdicionarProcessos.setEnabled(false);
     Listas listas = Listas.getInstance();
-    int tempoTotal = random.nextInt(10) + 4;
-    int prioridade = random.nextInt(4);
-    int deadLine = random.nextInt(17) + 4;
-    int tamanhoBloco = (int) Math.pow(2, random.nextInt(3) + 5);
+    int tempoTotal = random.getTempoTotalRandom();
+    int prioridade = random.getPrioridadeRandom();
+    int deadLine = random.getDeadLineRandom();
+    int tamanhoBloco = random.getTamanhoBlocoRandom();
 
     if (Escalonador.ltg == true) {
       quantum = 0;

@@ -4,12 +4,13 @@ import br.com.unifor.escalonador.swing.App;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class Escalonador extends SwingWorker<Void, Void> {
-  private static Random random = new Random();
   private Processo processo;
   public static List<Processo> filaProcessos;
 
@@ -99,13 +100,14 @@ public class Escalonador extends SwingWorker<Void, Void> {
   }
 
   private void criarProcessos() {
+    NumerosRandom random = new NumerosRandom();
     filaProcessos = new LinkedList<>();
     for (int i = 0; i < numeroProcessos; i++) {
-      int tempoTotal = random.nextInt(10) + 4;
-      int prioridade = random.nextInt(4);
-      int deadLine = random.nextInt(17) + 4;
+      int tempoTotal = random.getTempoTotalRandom();
+      int prioridade = random.getPrioridadeRandom();
+      int deadLine = random.getDeadLineRandom();
       int quantumAux;
-      int tamanhoBloco = (int) Math.pow(2, random.nextInt(3) + 5);
+      int tamanhoBloco = random.getTamanhoBlocoRandom();
 
       if (this.ltg == true) {
         quantumAux = 0;
@@ -122,7 +124,6 @@ public class Escalonador extends SwingWorker<Void, Void> {
         }
         deadLine = 0;
       }
-
       processo = new Processo(App.identificador, tempoTotal, tempoTotal, prioridade, quantumAux, quantumAux, deadLine, 0, tamanhoBloco, false);
       filaProcessos.add(processo);
       App.identificador++;
