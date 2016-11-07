@@ -31,8 +31,13 @@ public class Teste {
 
     Random random = new Random();
     for (int i = 0; i < 30; i++) {
-      int x = (int) Math.pow(2, random.nextInt(5) + 3);
-      System.out.print(x + " ");
+      //int x = (int) Math.pow(2, random.nextInt(5) + 3);
+
+      int x = random.nextInt(25) + 1;
+      if (x > 5 && x < 11) {
+        System.out.print(x + " ");
+
+      }
     }
   }
 }

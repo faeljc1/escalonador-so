@@ -2,6 +2,7 @@ package br.com.unifor.escalonador.entidades;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Cores {
   public static List<Processo> cores = new LinkedList<>();
@@ -73,6 +74,12 @@ public class Cores {
           cores.remove(i);
           Processo aux = lista.aptosRemoveProcesso(0);
           addMemoria(lista, aux, i);
+        } else {
+          Random r = new Random();
+          int requisicao = r.nextInt(25) + 1;
+          if (requisicao > 5 && requisicao < 11) {
+            addMemoriaRequisicao(lista, p);
+          }
         }
       }
     }
@@ -128,6 +135,20 @@ public class Cores {
     } else {
       aux.setAbortados(true);
       lista.finalAddProcesso(aux);
+    }
+  }
+
+  public synchronized void addMemoriaRequisicao(Listas lista, Processo aux) {
+    if (memoria.existeExpaco(aux.getTamanhoMemoria())) {
+      memoria.criaSetor(aux.getTamanhoMemoria(), aux);
+    } else if (memoria.existeBlocoVazio(aux.getTamanhoMemoria())) {
+      memoria.addElemento(aux.getTamanhoMemoria(), aux);
+    } else {
+      aux.setDeadLine(99);
+      aux.setAbortados(true);
+      lista.finalAddProcesso(aux);
+      cores.remove(aux);
+      memoria.removeElemento(aux);
     }
   }
 }

@@ -229,5 +229,8 @@ public class Escalonador extends SwingWorker<Void, Void> {
     if (p.isAbortados() == true) {
       label.setForeground(Color.red);
     }
+    if (p.getDeadLine() == 99) {
+      label.setForeground(new Color(150, 0, 0));
+    }
   }
 }

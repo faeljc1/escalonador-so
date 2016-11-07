@@ -24,7 +24,7 @@ public class Memoria {
       listaMemoria.add(indice, b);
 
       IndiceBloco ib = new IndiceBloco(indice, b);
-      if (!existeBloco2(tamanhoBloco)) {
+      if (!existeBloco(tamanhoBloco)) {
         lista = new LinkedList<>();
         lista.add(ib);
         blocoMap.put(tamanhoBloco, lista);
@@ -59,10 +59,11 @@ public class Memoria {
   }
 
   public synchronized Processo removeElemento(Processo processo) {
+    Processo aux = null;
     for (int i = 0; i < listaMemoria.size(); i++) {
       Bloco s = listaMemoria.get(i);
-      if (s.getProcesso() != null && s.getProcesso().equals(processo)) {
-        Processo aux = s.getProcesso();
+      if (s.getProcesso() != null && s.getProcesso().getIdentificador() == processo.getIdentificador()) {
+        aux = s.getProcesso();
         s.setProcesso(null);
 
         lista = blocoMap.get(aux.getTamanhoMemoria());
@@ -72,10 +73,9 @@ public class Memoria {
           }
           break;
         }
-        return aux;
       }
     }
-    return null;
+    return aux;
   }
 
   public synchronized long getTamanho(long tamanho) {
@@ -100,7 +100,7 @@ public class Memoria {
     return false;
   }
 
-  public synchronized boolean existeBloco2(long tamanhoBloco) {
+  public synchronized boolean existeBloco(long tamanhoBloco) {
     if (blocoMap.containsKey(tamanhoBloco)) {
       return true;
     }
