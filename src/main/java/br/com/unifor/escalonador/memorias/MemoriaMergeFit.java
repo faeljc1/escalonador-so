@@ -1,8 +1,12 @@
-package br.com.unifor.escalonador.entidades;
+package br.com.unifor.escalonador.memorias;
+
+import br.com.unifor.escalonador.entidades.Bloco;
+import br.com.unifor.escalonador.entidades.IndiceBloco;
+import br.com.unifor.escalonador.entidades.Processo;
 
 import java.util.*;
 
-public class Memoria {
+public class MemoriaMergeFit {
   private final long tamanho;
   private long totalTamanho;
   private int indice;
@@ -12,7 +16,7 @@ public class Memoria {
   private static Map<Long, List<IndiceBloco>> blocoMap = new HashMap<>();
   private List<IndiceBloco> lista;
 
-  public Memoria(long tamanho) {
+  public MemoriaMergeFit(long tamanho) {
     this.tamanho = tamanho;
     totalTamanho = 0;
     indice = 0;

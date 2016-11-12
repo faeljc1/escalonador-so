@@ -39,7 +39,7 @@ public class App extends JFrame {
   public static JButton btnParar;
   public static JComboBox<String[]> comboBox;
 
-  String[] algoritmos = {"Least Time to Go", "Round Robin"};
+  String[] algoritmos = {"Least Time to Go", "Round Robin - BestFit", "Round Robin - MergeFit", "Round Robin - QuickFit"};
 
   public App() {
     this.setExtendedState(MAXIMIZED_BOTH);
@@ -134,7 +134,7 @@ public class App extends JFrame {
     btnParar.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(btnParar);
 
-    JLabel lblMemoria = new JLabel("Memoria");
+    JLabel lblMemoria = new JLabel("MemoriaBestFit");
     lblMemoria.setFont(new Font("Tahoma", Font.PLAIN, 14));
     lblMemoria.setBounds(717, 15, 64, 17);
     painelParametros.add(lblMemoria);

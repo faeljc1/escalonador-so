@@ -1,5 +1,8 @@
-package br.com.unifor.escalonador.entidades;
+package br.com.unifor.escalonador.algoritmos;
 
+import br.com.unifor.escalonador.entidades.Cores;
+import br.com.unifor.escalonador.entidades.Escalonador;
+import br.com.unifor.escalonador.entidades.Listas;
 import br.com.unifor.escalonador.swing.App;
 
 public class LTG extends Escalonador {

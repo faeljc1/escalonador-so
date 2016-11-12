@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Teste {
   public static void main(String[] args) {
-    /*Memoria memoria = new Memoria(512);
+    /*MemoriaBestFit memoria = new MemoriaBestFit(512);
     memoria.criaSetor(64, "A");
     memoria.criaSetor(32, "B");
     memoria.criaSetor(32, "C");

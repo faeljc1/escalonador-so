@@ -1,5 +1,7 @@
 package br.com.unifor.escalonador.entidades;
 
+import br.com.unifor.escalonador.memorias.MemoriaBestFit;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -8,12 +10,12 @@ public class Cores {
   public static List<Processo> cores = new LinkedList<>();
   private int quantidadeCores;
   private long tamanhoMemoria;
-  private Memoria memoria;
+  private MemoriaBestFit memoria;
 
   public Cores(int numeroCores, long tamanhoMemoria) {
     this.quantidadeCores = numeroCores;
     this.tamanhoMemoria = tamanhoMemoria;
-    memoria = new Memoria(tamanhoMemoria);
+    memoria = new MemoriaBestFit(tamanhoMemoria);
   }
 
   public synchronized boolean coreCheio() {
@@ -139,6 +141,9 @@ public class Cores {
   }
 
   public synchronized void addMemoriaRequisicao(Listas lista, Processo aux) {
+    long tamanho = new NumerosRandom().getTamanhoBlocoRandom();
+    System.out.println("Processo: " + aux.getIdentificador() + " / Tamanho Inicial: " + aux.getTamanhoMemoria() + " / Novo Tamanho: " + tamanho);
+    aux.setTamanhoMemoria(tamanho);
     if (memoria.existeExpaco(aux.getTamanhoMemoria())) {
       memoria.criaSetor(aux.getTamanhoMemoria(), aux);
     } else if (memoria.existeBlocoVazio(aux.getTamanhoMemoria())) {

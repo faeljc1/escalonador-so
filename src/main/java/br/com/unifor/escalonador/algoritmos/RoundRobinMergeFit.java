@@ -1,8 +1,11 @@
-package br.com.unifor.escalonador.entidades;
+package br.com.unifor.escalonador.algoritmos;
 
+import br.com.unifor.escalonador.entidades.Cores;
+import br.com.unifor.escalonador.entidades.Escalonador;
+import br.com.unifor.escalonador.entidades.Listas;
 import br.com.unifor.escalonador.swing.App;
 
-public class RoundRobin extends Escalonador {
+public class RoundRobinMergeFit extends Escalonador {
   private static Listas listas;
   private static Cores cores;
 

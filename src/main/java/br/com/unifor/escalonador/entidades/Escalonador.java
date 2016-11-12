@@ -1,5 +1,10 @@
 package br.com.unifor.escalonador.entidades;
 
+import br.com.unifor.escalonador.algoritmos.LTG;
+import br.com.unifor.escalonador.algoritmos.RoundRobinBestFit;
+import br.com.unifor.escalonador.algoritmos.RoundRobinMergeFit;
+import br.com.unifor.escalonador.algoritmos.RoundRobinQuickFit;
+import br.com.unifor.escalonador.memorias.MemoriaBestFit;
 import br.com.unifor.escalonador.swing.App;
 
 import javax.swing.*;
@@ -50,8 +55,24 @@ public class Escalonador extends SwingWorker<Void, Void> {
           this.quantum = Integer.parseInt(App.txfQuantum.getText());
           criarProcessos();
           System.out.println(quantum);
-          RoundRobin rr = new RoundRobin();
-          rr.iniciarAlgoritmo(numeroCores, memoria);
+          RoundRobinBestFit roundRobinBestFit = new RoundRobinBestFit();
+          roundRobinBestFit.iniciarAlgoritmo(numeroCores, memoria);
+          break;
+        case 2:
+          this.ltg = false;
+          this.quantum = Integer.parseInt(App.txfQuantum.getText());
+          criarProcessos();
+          System.out.println(quantum);
+          RoundRobinMergeFit roundRobinMergeFit = new RoundRobinMergeFit();
+          roundRobinMergeFit.iniciarAlgoritmo(numeroCores, memoria);
+          break;
+        case 3:
+          this.ltg = false;
+          this.quantum = Integer.parseInt(App.txfQuantum.getText());
+          criarProcessos();
+          System.out.println(quantum);
+          RoundRobinQuickFit roundRobinQuickFit = new RoundRobinQuickFit();
+          roundRobinQuickFit.iniciarAlgoritmo(numeroCores, memoria);
           break;
 
         default:
@@ -159,7 +180,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
 
   public synchronized void exibirMemoria(JPanel painel) {
     painel.removeAll();
-    for (Bloco s : Memoria.listaMemoria) {
+    for (Bloco s : MemoriaBestFit.listaMemoria) {
       if (s.getProcesso() != null) {
         lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memória Processo: "
             + s.getProcesso().getTamanhoMemoria() + "<br>Bloco Memória: " + s.getTamanhoBloco() + "</body></html>");
