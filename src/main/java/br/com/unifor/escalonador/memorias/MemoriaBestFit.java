@@ -26,17 +26,6 @@ public class MemoriaBestFit {
     if (existeExpaco(tamanhoBloco)) {
       Bloco b = new Bloco(tamanhoBloco, elemento, null, null);
       listaMemoria.add(indice, b);
-
-      IndiceBloco ib = new IndiceBloco(indice, b);
-      if (!existeBloco(tamanhoBloco)) {
-        lista = new LinkedList<>();
-        lista.add(ib);
-        blocoMap.put(tamanhoBloco, lista);
-      } else {
-        lista = blocoMap.get(tamanhoBloco);
-        lista.add(ib);
-      }
-
       indice++;
       totalTamanho += tamanhoBloco;
     }
@@ -48,15 +37,6 @@ public class MemoriaBestFit {
       if (bloco.getProcesso() == null && bloco.getTamanhoBloco() >= tamanhoBloco) {
         bloco.setProcesso(processo);
         bloco.getProcesso().setTamanhoMemoria(tamanhoBloco);
-
-        lista = blocoMap.get(tamanhoBloco);
-        for (IndiceBloco ib : lista) {
-          if (ib.getIndiceBloco() == i) {
-            ib.getBloco().setProcesso(processo);
-            ib.getBloco().getProcesso().setTamanhoMemoria(tamanhoBloco);
-          }
-          break;
-        }
         break;
       }
     }
@@ -69,14 +49,6 @@ public class MemoriaBestFit {
       if (s.getProcesso() != null && s.getProcesso().getIdentificador() == processo.getIdentificador()) {
         aux = s.getProcesso();
         s.setProcesso(null);
-
-        lista = blocoMap.get(aux.getTamanhoMemoria());
-        for (IndiceBloco ib : lista) {
-          if (ib.getIndiceBloco() == i) {
-            ib.getBloco().setProcesso(null);
-          }
-          break;
-        }
       }
     }
     return aux;
