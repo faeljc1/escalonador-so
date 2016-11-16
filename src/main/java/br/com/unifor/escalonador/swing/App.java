@@ -5,9 +5,22 @@ import br.com.unifor.escalonador.actions.ActionIniciar;
 import br.com.unifor.escalonador.actions.ActionParar;
 import br.com.unifor.escalonador.actions.ActionSelecionar;
 
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
-import java.awt.*;
 
 public class App extends JFrame {
 
@@ -22,7 +35,10 @@ public class App extends JFrame {
   public static JPanel painelAptos;
   public static JPanel painelAbortados;
   public static JPanel painelMemoria;
-  public static JScrollPane barraRolagem;
+  public static JPanel painelCima;
+  public static JPanel painelCentro;
+  public static JPanel painelBaixo;
+  public static JPanel painelListaMemoria;
 
   public static JTextField txfProcessosIniciais;
   public static JTextField txfNumeroProcessadores;
@@ -39,26 +55,31 @@ public class App extends JFrame {
   public static JButton btnParar;
   public static JComboBox<String[]> comboBox;
 
-  String[] algoritmos = {"Least Time to Go", "Round Robin - BestFit", "Round Robin - MergeFit", "Round Robin - QuickFit"};
+  String[] algoritmos = {"Least Time to Go", "Round Robin - BestFit",
+      "Round Robin - MergeFit", "Round Robin - QuickFit"};
 
   public App() {
     this.setExtendedState(MAXIMIZED_BOTH);
     getContentPane().setLayout(null);
 
+    painelCima = new JPanel();
+    painelCima.setBounds(0, 0, 1362, 274);
+    getContentPane().add(painelCima);
+    painelCima.setLayout(new BoxLayout(painelCima, BoxLayout.X_AXIS));
+
     painelParametros = new JPanel();
-    painelParametros.setBorder(new TitledBorder(null, "",
-        TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelParametros.setBounds(10, 11, 1352, 120);
-    getContentPane().add(painelParametros);
+    painelCima.add(new JScrollPane(painelParametros));
+    painelParametros.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+        TitledBorder.TOP, null, null));
     painelParametros.setLayout(null);
 
     lblProcessosIniciais = new JLabel("Processos iniciais");
-    lblProcessosIniciais.setBounds(499, 15, 101, 17);
+    lblProcessosIniciais.setBounds(10, 72, 101, 17);
     lblProcessosIniciais.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(lblProcessosIniciais);
 
     txfProcessosIniciais = new JTextField();
-    txfProcessosIniciais.setBounds(608, 11, 47, 25);
+    txfProcessosIniciais.setBounds(216, 68, 58, 25);
     txfProcessosIniciais.setEditable(false);
     txfProcessosIniciais.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txfProcessosIniciais
@@ -67,12 +88,12 @@ public class App extends JFrame {
     painelParametros.add(txfProcessosIniciais);
 
     lblNumeroProcessadores = new JLabel("N\u00FAmero de processadores");
-    lblNumeroProcessadores.setBounds(440, 47, 160, 17);
+    lblNumeroProcessadores.setBounds(10, 100, 160, 17);
     lblNumeroProcessadores.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(lblNumeroProcessadores);
 
     txfNumeroProcessadores = new JTextField();
-    txfNumeroProcessadores.setBounds(608, 43, 47, 25);
+    txfNumeroProcessadores.setBounds(216, 96, 58, 25);
     txfNumeroProcessadores.setEditable(false);
     txfNumeroProcessadores.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txfNumeroProcessadores
@@ -81,16 +102,16 @@ public class App extends JFrame {
     painelParametros.add(txfNumeroProcessadores);
 
     lblQtdNumeroProcessos = new JLabel("(1, 64)");
-    lblQtdNumeroProcessos.setBounds(659, 50, 58, 14);
+    lblQtdNumeroProcessos.setBounds(174, 103, 47, 14);
     painelParametros.add(lblQtdNumeroProcessos);
 
     lblQuantum = new JLabel("Quantum");
-    lblQuantum.setBounds(542, 79, 58, 17);
+    lblQuantum.setBounds(10, 156, 58, 17);
     lblQuantum.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(lblQuantum);
 
     txfQuantum = new JTextField();
-    txfQuantum.setBounds(608, 75, 47, 25);
+    txfQuantum.setBounds(216, 152, 58, 25);
     txfQuantum.setFont(new Font("Tahoma", Font.PLAIN, 14));
     txfQuantum.setEditable(false);
     txfQuantum.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -98,45 +119,44 @@ public class App extends JFrame {
     painelParametros.add(txfQuantum);
 
     lblQtdQuantum = new JLabel("(2, 20)");
-    lblQtdQuantum.setBounds(659, 82, 58, 14);
+    lblQtdQuantum.setBounds(72, 159, 58, 14);
     painelParametros.add(lblQtdQuantum);
 
     comboBox = new JComboBox(algoritmos);
-    comboBox.setBounds(23, 44, 243, 20);
+    comboBox.setBounds(10, 13, 243, 20);
     comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(comboBox);
 
     btnSelecionar = new JButton("Selecionar");
-    btnSelecionar.setBounds(276, 43, 115, 23);
+    btnSelecionar.setBounds(263, 12, 115, 23);
     btnSelecionar.addActionListener(new ActionSelecionar());
     btnSelecionar.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(btnSelecionar);
 
     btnIniciar = new JButton("Iniciar");
-    btnIniciar.setBounds(925, 43, 90, 25);
+    btnIniciar.setBounds(10, 213, 90, 25);
     btnIniciar.addActionListener(new ActionIniciar());
     btnIniciar.setEnabled(false);
     btnIniciar.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(btnIniciar);
 
     btnAdicionarProcessos = new JButton("Adicionar Processos");
-    btnAdicionarProcessos.setBounds(1025, 43, 183, 25);
-    btnAdicionarProcessos.addActionListener(new
-        ActionAdicionarProcessos());
+    btnAdicionarProcessos.setBounds(110, 213, 183, 25);
+    btnAdicionarProcessos.addActionListener(new ActionAdicionarProcessos());
     btnAdicionarProcessos.setEnabled(false);
     btnAdicionarProcessos.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(btnAdicionarProcessos);
 
     btnParar = new JButton("Parar");
-    btnParar.setBounds(1218, 43, 89, 25);
+    btnParar.setBounds(303, 213, 89, 25);
     btnParar.addActionListener(new ActionParar());
     btnParar.setEnabled(false);
     btnParar.setFont(new Font("Tahoma", Font.PLAIN, 14));
     painelParametros.add(btnParar);
 
-    JLabel lblMemoria = new JLabel("MemoriaBestFit");
+    JLabel lblMemoria = new JLabel("Memoria");
     lblMemoria.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    lblMemoria.setBounds(717, 15, 64, 17);
+    lblMemoria.setBounds(10, 128, 64, 17);
     painelParametros.add(lblMemoria);
 
     txfMemoria = new JTextField();
@@ -144,34 +164,48 @@ public class App extends JFrame {
     txfMemoria.setEditable(false);
     txfMemoria.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     txfMemoria.setColumns(10);
-    txfMemoria.setBounds(775, 11, 58, 25);
+    txfMemoria.setBounds(216, 124, 58, 25);
     painelParametros.add(txfMemoria);
 
-    painelExecucao = new JPanel();
-    painelExecucao.setBorder(new TitledBorder(UIManager
-        .getBorder("TitledBorder.border"),
-        "Processos em execu\u00E7\u00E3o", TitledBorder.LEADING,
-        TitledBorder.TOP, null, null));
-    painelExecucao.setBounds(10, 131, 673, 219);
-    getContentPane().add(painelExecucao);
-
-    painelAptos = new JPanel();
-    painelAptos.setBorder(new TitledBorder(null, "Processos Aptos",
-        TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelAptos.setBounds(10, 348, 1352, 192);
-    getContentPane().add(painelAptos);
-
-    painelAbortados = new JPanel();
-    painelAbortados.setBorder(new TitledBorder(null, "Processos Finalizados / Abortados",
-        TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelAbortados.setBounds(10, 536, 1352, 165);
-    getContentPane().add(painelAbortados);
-
     painelMemoria = new JPanel();
+    painelCima.add(new JScrollPane(painelMemoria));
     painelMemoria.setBorder(new TitledBorder(null, "Memoria",
         TitledBorder.LEADING, TitledBorder.TOP, null, null));
-    painelMemoria.setBounds(681, 131, 681, 219);
-    getContentPane().add(painelMemoria);
+
+    painelListaMemoria = new JPanel();
+    painelListaMemoria.setBorder(new TitledBorder(UIManager
+        .getBorder("TitledBorder.border"), "Listas Mem\u00F3ria",
+        TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+    painelCima.add(new JScrollPane(painelListaMemoria));
+
+    painelCentro = new JPanel();
+    painelCentro.setBounds(0, 276, 1362, 172);
+    getContentPane().add(painelCentro);
+    painelCentro.setLayout(new BoxLayout(painelCentro, BoxLayout.X_AXIS));
+
+    painelExecucao = new JPanel();
+    JScrollPane scrollPane = new JScrollPane(painelExecucao);
+    painelCentro.add(scrollPane);
+    painelExecucao.setBorder(new TitledBorder(UIManager
+        .getBorder("TitledBorder.border"), "Processos em execu\u00E7\u00E3o",
+        TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+    painelBaixo = new JPanel();
+    painelBaixo.setBounds(0, 450, 1362, 253);
+    getContentPane().add(painelBaixo);
+    painelBaixo.setLayout(new BoxLayout(painelBaixo, BoxLayout.X_AXIS));
+
+    painelAptos = new JPanel();
+    FlowLayout flowLayout = (FlowLayout) painelAptos.getLayout();
+    painelBaixo.add(new JScrollPane(painelAptos));
+    painelAptos.setBorder(new TitledBorder(null, "Processos Aptos",
+        TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+    painelAbortados = new JPanel();
+    painelBaixo.add(new JScrollPane(painelAbortados));
+    painelAbortados.setBorder(new TitledBorder(null,
+        "Processos Finalizados / Abortados", TitledBorder.LEADING,
+        TitledBorder.TOP, null, null));
   }
 
   public static void main(String[] args) {

@@ -1,9 +1,6 @@
 package br.com.unifor.escalonador.memorias;
 
-import br.com.unifor.escalonador.entidades.Bloco;
-import br.com.unifor.escalonador.entidades.IndiceBloco;
-import br.com.unifor.escalonador.entidades.Processo;
-import br.com.unifor.escalonador.entidades.QuantidadeRequisicao;
+import br.com.unifor.escalonador.entidades.*;
 
 import javax.swing.*;
 import java.util.*;
@@ -14,7 +11,6 @@ public class MemoriaQuickFit implements Memoria {
   private int indice;
   private static int numeroRequisicao;
 
-  public static List<Bloco> listaMemoria = new LinkedList<>();
   private static List<List<IndiceBloco>> blocosVazios = new ArrayList<>();
   private static Map<Long, List<IndiceBloco>> blocoMap = new HashMap<>();
   private static List<QuantidadeRequisicao> listaRequisicoes = new ArrayList<>();
@@ -24,12 +20,13 @@ public class MemoriaQuickFit implements Memoria {
     totalTamanho = 0;
     indice = 0;
     numeroRequisicao = 0;
+    Listas.getInstance().listaMemoria = new ArrayList<>();
   }
 
   public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
     if (existeExpaco(tamanhoBloco)) {
       Bloco b = new Bloco(tamanhoBloco, elemento, null, null);
-      listaMemoria.add(indice, b);
+      Listas.getInstance().listaMemoria.add(indice, b);
       indice++;
       totalTamanho += tamanhoBloco;
 
@@ -45,8 +42,8 @@ public class MemoriaQuickFit implements Memoria {
   }
 
   public synchronized void addElemento(long tamanhoBloco, Processo processo) {
-    for (int i = 0; i < listaMemoria.size(); i++) {
-      Bloco bloco = listaMemoria.get(i);
+    for (int i = 0; i < Listas.getInstance().listaMemoria.size(); i++) {
+      Bloco bloco = Listas.getInstance().listaMemoria.get(i);
       if (bloco.getProcesso() == null && bloco.getTamanhoBloco() >= tamanhoBloco) {
         bloco.setProcesso(processo);
         bloco.getProcesso().setTamanhoMemoria(tamanhoBloco);
@@ -66,8 +63,8 @@ public class MemoriaQuickFit implements Memoria {
 
   public synchronized Processo removeElemento(Processo processo) {
     Processo aux = null;
-    for (int i = 0; i < listaMemoria.size(); i++) {
-      Bloco s = listaMemoria.get(i);
+    for (int i = 0; i < Listas.getInstance().listaMemoria.size(); i++) {
+      Bloco s = Listas.getInstance().listaMemoria.get(i);
       if (s.getProcesso() != null && s.getProcesso().getIdentificador() == processo.getIdentificador()) {
         aux = s.getProcesso();
         s.setProcesso(null);
@@ -89,8 +86,8 @@ public class MemoriaQuickFit implements Memoria {
   }
 
   public synchronized boolean existeBlocoVazio(long tamanhoBloco) {
-    for (int i = 0; i < listaMemoria.size(); i++) {
-      Bloco s = listaMemoria.get(i);
+    for (int i = 0; i < Listas.getInstance().listaMemoria.size(); i++) {
+      Bloco s = Listas.getInstance().listaMemoria.get(i);
       if (s.getProcesso() == null && s.getTamanhoBloco() >= tamanhoBloco) {
         return true;
       }
@@ -149,8 +146,8 @@ public class MemoriaQuickFit implements Memoria {
       }
     }
 
-    for (int i = 0; i < listaMemoria.size(); i++) {
-      Bloco b = listaMemoria.get(i);
+    for (int i = 0; i < Listas.getInstance().listaMemoria.size(); i++) {
+      Bloco b = Listas.getInstance().listaMemoria.get(i);
       if (blocoMap.containsKey(b.getTamanhoBloco())) {
         blocoMap.get(b.getTamanhoBloco()).add(new IndiceBloco(i, b));
       } else {

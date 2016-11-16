@@ -1,15 +1,18 @@
 package br.com.unifor.escalonador.entidades;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Listas {
   public List<Processo> aptos;
   public List<Processo> finalAbortados;
+  public List<Bloco> listaMemoria;
   private static Listas uniqueInstance = new Listas();
 
   private Listas() {
     finalAbortados = new LinkedList<>();
+    listaMemoria = new ArrayList<>();
     aptos = Escalonador.filaProcessos;
   }
 

@@ -178,7 +178,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
 
   public synchronized void exibirMemoria(JPanel painel) {
     painel.removeAll();
-    for (Bloco s : MemoriaBestFit.listaMemoria) {
+    for (Bloco s : Listas.getInstance().listaMemoria) {
       if (s.getProcesso() != null) {
         lblProcesso = new JLabel("<html><body>Processo: " + s.getProcesso().getIdentificador() + "<br>Memória Processo: "
             + s.getProcesso().getTamanhoMemoria() + "<br>Bloco Memória: " + s.getTamanhoBloco() + "</body></html>");
