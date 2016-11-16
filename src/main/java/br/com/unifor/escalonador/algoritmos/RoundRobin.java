@@ -5,13 +5,13 @@ import br.com.unifor.escalonador.entidades.Escalonador;
 import br.com.unifor.escalonador.entidades.Listas;
 import br.com.unifor.escalonador.swing.App;
 
-public class RoundRobinMergeFit extends Escalonador {
+public class RoundRobin extends Escalonador {
   private static Listas listas;
   private static Cores cores;
 
-  public synchronized void iniciarAlgoritmo(int numeroCores, long memoria) throws InterruptedException {
+  public synchronized void iniciarAlgoritmo(int numeroCores, long memoria, int tipoAlgoritmo) throws InterruptedException {
     listas = Listas.getInstance();
-    cores = new Cores(numeroCores, memoria);
+    cores = new Cores(numeroCores, memoria, tipoAlgoritmo);
     exibirTela(App.painelAptos, listas.aptos);
 
     cores.insereCoreAll(listas);

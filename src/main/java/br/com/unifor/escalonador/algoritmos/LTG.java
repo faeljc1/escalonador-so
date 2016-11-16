@@ -10,7 +10,7 @@ public class LTG extends Escalonador {
   private static Listas listas;
 
   public synchronized void iniciarAlgoritmo(int numeroCores) throws InterruptedException {
-    cores = new Cores(numeroCores, 0);
+    cores = new Cores(numeroCores, 0, 0);
     ordenaLista();
     listas = Listas.getInstance();
     exibirTela(App.painelAptos, listas.aptos);

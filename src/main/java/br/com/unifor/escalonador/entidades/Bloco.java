@@ -4,6 +4,14 @@ public class Bloco {
   private final long tamanhoBloco;
   private Processo processo;
   private Bloco proximo;
+  private int quantidadeBlocos;
+
+  public Bloco(long tamanhoBloco, Processo processo, Bloco proximo, Bloco anterior, int quantidadeBlocos) {
+    this.tamanhoBloco = tamanhoBloco;
+    this.processo = processo;
+    this.proximo = proximo;
+    this.quantidadeBlocos = quantidadeBlocos;
+  }
 
   public Bloco(long tamanhoBloco, Processo processo, Bloco proximo, Bloco anterior) {
     this.tamanhoBloco = tamanhoBloco;
@@ -35,5 +43,13 @@ public class Bloco {
 
   public void setProximo(Bloco proximo) {
     this.proximo = proximo;
+  }
+
+  public int getQuantidadeBlocos() {
+    return quantidadeBlocos;
+  }
+
+  public void setQuantidadeBlocos(int quantidadeBlocos) {
+    this.quantidadeBlocos = quantidadeBlocos;
   }
 }

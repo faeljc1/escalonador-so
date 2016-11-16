@@ -1,6 +1,9 @@
 package br.com.unifor.escalonador.entidades;
 
+import br.com.unifor.escalonador.memorias.Memoria;
 import br.com.unifor.escalonador.memorias.MemoriaBestFit;
+import br.com.unifor.escalonador.memorias.MemoriaMergeFit;
+import br.com.unifor.escalonador.memorias.MemoriaQuickFit;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,12 +13,19 @@ public class Cores {
   public static List<Processo> cores = new LinkedList<>();
   private int quantidadeCores;
   private long tamanhoMemoria;
-  private MemoriaBestFit memoria;
+  private Memoria memoria;
 
-  public Cores(int numeroCores, long tamanhoMemoria) {
+  public Cores(int numeroCores, long tamanhoMemoria, int tipoAlgoritmo) {
     this.quantidadeCores = numeroCores;
     this.tamanhoMemoria = tamanhoMemoria;
-    memoria = new MemoriaBestFit(tamanhoMemoria);
+
+    if (tipoAlgoritmo == 1) {
+      memoria = new MemoriaBestFit(tamanhoMemoria);
+    } else if (tipoAlgoritmo == 2) {
+      memoria = new MemoriaMergeFit(tamanhoMemoria);
+    } else if (tipoAlgoritmo == 3) {
+      memoria = new MemoriaQuickFit(tamanhoMemoria);
+    }
   }
 
   public synchronized boolean coreCheio() {

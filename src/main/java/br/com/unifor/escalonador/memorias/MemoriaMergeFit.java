@@ -6,7 +6,7 @@ import br.com.unifor.escalonador.entidades.Processo;
 
 import java.util.*;
 
-public class MemoriaMergeFit {
+public class MemoriaMergeFit implements Memoria {
   private final long tamanho;
   private long totalTamanho;
   private int indice;

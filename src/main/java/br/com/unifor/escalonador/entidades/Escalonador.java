@@ -1,9 +1,7 @@
 package br.com.unifor.escalonador.entidades;
 
 import br.com.unifor.escalonador.algoritmos.LTG;
-import br.com.unifor.escalonador.algoritmos.RoundRobinBestFit;
-import br.com.unifor.escalonador.algoritmos.RoundRobinMergeFit;
-import br.com.unifor.escalonador.algoritmos.RoundRobinQuickFit;
+import br.com.unifor.escalonador.algoritmos.RoundRobin;
 import br.com.unifor.escalonador.memorias.MemoriaBestFit;
 import br.com.unifor.escalonador.swing.App;
 
@@ -55,24 +53,24 @@ public class Escalonador extends SwingWorker<Void, Void> {
           this.quantum = Integer.parseInt(App.txfQuantum.getText());
           criarProcessos();
           System.out.println(quantum);
-          RoundRobinBestFit roundRobinBestFit = new RoundRobinBestFit();
-          roundRobinBestFit.iniciarAlgoritmo(numeroCores, memoria);
+          RoundRobin roundRobin = new RoundRobin();
+          roundRobin.iniciarAlgoritmo(numeroCores, memoria, tipoAlgoritmo);
           break;
         case 2:
           this.ltg = false;
           this.quantum = Integer.parseInt(App.txfQuantum.getText());
           criarProcessos();
           System.out.println(quantum);
-          RoundRobinMergeFit roundRobinMergeFit = new RoundRobinMergeFit();
-          roundRobinMergeFit.iniciarAlgoritmo(numeroCores, memoria);
+          RoundRobin roundRobinMergeFit = new RoundRobin();
+          roundRobinMergeFit.iniciarAlgoritmo(numeroCores, memoria, tipoAlgoritmo);
           break;
         case 3:
           this.ltg = false;
           this.quantum = Integer.parseInt(App.txfQuantum.getText());
           criarProcessos();
           System.out.println(quantum);
-          RoundRobinQuickFit roundRobinQuickFit = new RoundRobinQuickFit();
-          roundRobinQuickFit.iniciarAlgoritmo(numeroCores, memoria);
+          RoundRobin roundRobinQuickFit = new RoundRobin();
+          roundRobinQuickFit.iniciarAlgoritmo(numeroCores, memoria, tipoAlgoritmo);
           break;
 
         default:

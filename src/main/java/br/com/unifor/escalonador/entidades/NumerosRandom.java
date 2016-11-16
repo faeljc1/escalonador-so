@@ -1,6 +1,7 @@
 package br.com.unifor.escalonador.entidades;
 
 import java.util.Random;
+
 public class NumerosRandom {
   Random random;
 
@@ -21,6 +22,6 @@ public class NumerosRandom {
   }
 
   public int getTamanhoBlocoRandom() {
-    return (int) Math.pow(2, random.nextInt(3) + 5);
+    return (int) Math.pow(2, random.nextInt(5) + 3);
   }
 }

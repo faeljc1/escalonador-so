@@ -3,42 +3,44 @@ package br.com.unifor.escalonador.memorias;
 import br.com.unifor.escalonador.entidades.Bloco;
 import br.com.unifor.escalonador.entidades.IndiceBloco;
 import br.com.unifor.escalonador.entidades.Processo;
+import br.com.unifor.escalonador.entidades.QuantidadeRequisicao;
 
+import javax.swing.*;
 import java.util.*;
 
-public class MemoriaQuickFit {
+public class MemoriaQuickFit implements Memoria {
   private final long tamanho;
   private long totalTamanho;
   private int indice;
+  private static int numeroRequisicao;
 
   public static List<Bloco> listaMemoria = new LinkedList<>();
   private static List<List<IndiceBloco>> blocosVazios = new ArrayList<>();
   private static Map<Long, List<IndiceBloco>> blocoMap = new HashMap<>();
-  private List<IndiceBloco> lista;
+  private static List<QuantidadeRequisicao> listaRequisicoes = new ArrayList<>();
 
   public MemoriaQuickFit(long tamanho) {
     this.tamanho = tamanho;
     totalTamanho = 0;
     indice = 0;
+    numeroRequisicao = 0;
   }
 
   public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
     if (existeExpaco(tamanhoBloco)) {
       Bloco b = new Bloco(tamanhoBloco, elemento, null, null);
       listaMemoria.add(indice, b);
-
-      IndiceBloco ib = new IndiceBloco(indice, b);
-      if (!existeBloco(tamanhoBloco)) {
-        lista = new LinkedList<>();
-        lista.add(ib);
-        blocoMap.put(tamanhoBloco, lista);
-      } else {
-        lista = blocoMap.get(tamanhoBloco);
-        lista.add(ib);
-      }
-
       indice++;
       totalTamanho += tamanhoBloco;
+
+      addRequisicao(tamanhoBloco);
+
+      numeroRequisicao++;
+      if (numeroRequisicao == 20) {
+        mapeiaLista();
+        JFrame novoFrame = new JFrame();
+        novoFrame.setVisible(true);
+      }
     }
   }
 
@@ -49,13 +51,13 @@ public class MemoriaQuickFit {
         bloco.setProcesso(processo);
         bloco.getProcesso().setTamanhoMemoria(tamanhoBloco);
 
-        lista = blocoMap.get(tamanhoBloco);
-        for (IndiceBloco ib : lista) {
-          if (ib.getIndiceBloco() == i) {
-            ib.getBloco().setProcesso(processo);
-            ib.getBloco().getProcesso().setTamanhoMemoria(tamanhoBloco);
-          }
-          break;
+        addRequisicao(tamanhoBloco);
+
+        numeroRequisicao++;
+        if (numeroRequisicao == 20) {
+          mapeiaLista();
+          JFrame novoFrame = new JFrame();
+          novoFrame.setVisible(true);
         }
         break;
       }
@@ -69,14 +71,6 @@ public class MemoriaQuickFit {
       if (s.getProcesso() != null && s.getProcesso().getIdentificador() == processo.getIdentificador()) {
         aux = s.getProcesso();
         s.setProcesso(null);
-
-        lista = blocoMap.get(aux.getTamanhoMemoria());
-        for (IndiceBloco ib : lista) {
-          if (ib.getIndiceBloco() == i) {
-            ib.getBloco().setProcesso(null);
-          }
-          break;
-        }
       }
     }
     return aux;
@@ -109,5 +103,59 @@ public class MemoriaQuickFit {
       return true;
     }
     return false;
+  }
+
+  public synchronized void addRequisicao(Long tamanhoMemoria) {
+    if (!existeQuantidadeRequisicao(tamanhoMemoria)) {
+      listaRequisicoes.add(new QuantidadeRequisicao(tamanhoMemoria, 1));
+    } else {
+      for (QuantidadeRequisicao q : listaRequisicoes) {
+        if (q.getTamanho() == tamanhoMemoria) {
+          q.setQuantidade(q.getQuantidade() + 1);
+          break;
+        }
+      }
+    }
+    ordenaLista();
+  }
+
+  public synchronized static boolean existeQuantidadeRequisicao(Long tamanho) {
+    for (QuantidadeRequisicao q : listaRequisicoes) {
+      if (q.getTamanho() == tamanho) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public synchronized void ordenaLista() {
+    Collections.sort(listaRequisicoes, new Comparator<Object>() {
+      public int compare(Object o1, Object o2) {
+        QuantidadeRequisicao p1 = (QuantidadeRequisicao) o1;
+        QuantidadeRequisicao p2 = (QuantidadeRequisicao) o2;
+        return p1.getQuantidade() > p2.getQuantidade() ? -1 : (p1.getQuantidade() < p2.getQuantidade() ? +1 : 0);
+      }
+    });
+  }
+
+  public synchronized void mapeiaLista() {
+    numeroRequisicao = 0;
+    for (int i = 0; i < listaRequisicoes.size(); i++) {
+      if (i < 3) {
+        blocoMap.put(listaRequisicoes.get(i).getTamanho(), new ArrayList<IndiceBloco>());
+      } else {
+        blocoMap.put((long) 1000, new ArrayList<IndiceBloco>());
+        break;
+      }
+    }
+
+    for (int i = 0; i < listaMemoria.size(); i++) {
+      Bloco b = listaMemoria.get(i);
+      if (blocoMap.containsKey(b.getTamanhoBloco())) {
+        blocoMap.get(b.getTamanhoBloco()).add(new IndiceBloco(i, b));
+      } else {
+        blocoMap.get((long) 1000).add(new IndiceBloco(i, b));
+      }
+    }
   }
 }
