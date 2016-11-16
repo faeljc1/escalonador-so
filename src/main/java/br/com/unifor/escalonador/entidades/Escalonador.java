@@ -7,9 +7,7 @@ import br.com.unifor.escalonador.swing.App;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -252,5 +250,32 @@ public class Escalonador extends SwingWorker<Void, Void> {
     if (p.getDeadLine() == 99) {
       label.setForeground(new Color(150, 0, 0));
     }
+  }
+
+
+  public static synchronized void exibirListasMemoria(JPanel painel) {
+    JLabel lblProcesso;
+    painel.removeAll();
+    Set<Long> chaves = Listas.blocoMap.keySet();
+    String texto = "";
+    for (long chave : chaves) {
+      texto = "<html><body>Lista de " + chave + " bytes";
+      List<IndiceBloco> listaBlocos = Listas.blocoMap.get(chave);
+      for (IndiceBloco indiceBloco : listaBlocos) {
+        texto = texto + "<br>Índice: " + indiceBloco.getIndiceBloco();
+        if (indiceBloco.getBloco().getProcesso() != null) {
+          texto = texto + " Processo: " + indiceBloco.getBloco().getProcesso().getIdentificador();
+        } else {
+          texto = texto + " Processo: nulo";
+        }
+      }
+      texto = texto + "</body></html>";
+      lblProcesso = new JLabel(texto);
+      painel.add(lblProcesso);
+      painel.doLayout();
+      painel.repaint();
+    }
+    painel.doLayout();
+    painel.repaint();
   }
 }

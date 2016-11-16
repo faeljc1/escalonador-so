@@ -1,18 +1,18 @@
 package br.com.unifor.escalonador.entidades;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Listas {
   public List<Processo> aptos;
   public List<Processo> finalAbortados;
   public List<Bloco> listaMemoria;
+  public static Map<Long, List<IndiceBloco>> blocoMap;
   private static Listas uniqueInstance = new Listas();
 
   private Listas() {
     finalAbortados = new LinkedList<>();
     listaMemoria = new ArrayList<>();
+    blocoMap = new HashMap<>();
     aptos = Escalonador.filaProcessos;
   }
 
@@ -31,7 +31,7 @@ public class Listas {
     }
   }
 
-  public static Listas getInstance() {
+  public synchronized static Listas getInstance() {
     return uniqueInstance;
   }
 
