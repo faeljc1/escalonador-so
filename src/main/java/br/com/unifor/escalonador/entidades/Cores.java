@@ -1,9 +1,7 @@
 package br.com.unifor.escalonador.entidades;
 
-import br.com.unifor.escalonador.memorias.Memoria;
-import br.com.unifor.escalonador.memorias.MemoriaBestFit;
-import br.com.unifor.escalonador.memorias.MemoriaMergeFit;
-import br.com.unifor.escalonador.memorias.MemoriaQuickFit;
+import br.com.unifor.escalonador.memorias.*;
+import br.com.unifor.escalonador.swing.App;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,10 +12,12 @@ public class Cores {
   private int quantidadeCores;
   private long tamanhoMemoria;
   private Memoria memoria;
+  private DiscoRigido discoRigido;
 
   public Cores(int numeroCores, long tamanhoMemoria, int tipoAlgoritmo) {
     this.quantidadeCores = numeroCores;
     this.tamanhoMemoria = tamanhoMemoria;
+    discoRigido = new DiscoRigido();
 
     if (tipoAlgoritmo == 1) {
       memoria = new MemoriaBestFit(tamanhoMemoria);
@@ -70,7 +70,11 @@ public class Cores {
         p.setQuantum(--quantum);
         if (tempoRestante <= 0) {
           lista.finalAddProcesso(p);
-          memoria.removeElemento(p);
+          //aqui
+          if (memoria.excedeuLimiar()) {
+            memoria.removeElemento(p);
+            addDiscoRigido(p);
+          }
           if (!lista.aptosEstaVazio()) {
             cores.remove(i);
             Processo aux = lista.aptosRemoveProcesso(0);
@@ -95,6 +99,7 @@ public class Cores {
         }
       }
     }
+
   }
 
   public synchronized int retornaIndiceCore(Processo p) {
@@ -148,6 +153,10 @@ public class Cores {
       aux.setAbortados(true);
       lista.finalAddProcesso(aux);
     }
+  }
+
+  public synchronized void addDiscoRigido(Processo aux) {
+    discoRigido.addElemento(aux);
   }
 
   public synchronized void addMemoriaRequisicao(Listas lista, Processo aux) {

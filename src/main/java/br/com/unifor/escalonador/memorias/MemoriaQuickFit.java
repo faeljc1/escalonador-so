@@ -93,6 +93,11 @@ public class MemoriaQuickFit implements Memoria {
     return false;
   }
 
+  @Override
+  public boolean excedeuLimiar() {
+    return false;
+  }
+
   public synchronized boolean existeBloco(long tamanhoBloco) {
     if (listas.blocoMap.containsKey(tamanhoBloco)) {
       return true;

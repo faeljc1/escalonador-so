@@ -6,12 +6,14 @@ public class Listas {
   public List<Processo> aptos;
   public List<Processo> finalAbortados;
   public List<Bloco> listaMemoria;
+  public List<Processo> listaDiscoRigido;
   public static Map<Long, List<IndiceBloco>> blocoMap;
   private static Listas uniqueInstance = new Listas();
 
   private Listas() {
     finalAbortados = new LinkedList<>();
     listaMemoria = new ArrayList<>();
+    listaDiscoRigido = new ArrayList<>();
     blocoMap = new HashMap<>();
     aptos = Escalonador.filaProcessos;
   }
@@ -25,7 +27,6 @@ public class Listas {
         if (deadLine <= 0) {
           p.setAbortados(true);
           finalAbortados.add(aptos.remove(i));
-          ;
         }
       }
     }

@@ -21,6 +21,8 @@ public class ActionSelecionar implements ActionListener {
     App.txfNumeroProcessadores.setEnabled(true);
     App.txfQuantum.setEnabled(true);
     App.txfMemoria.setEnabled(true);
+    App.txfLimiar.setEnabled(true);
+    App.txfLimiar.setEditable(true);
     if (App.comboBox.getSelectedIndex() == 0) {
       App.txfQuantum.setEditable(false);
     } else {

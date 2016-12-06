@@ -4,6 +4,7 @@ import br.com.unifor.escalonador.entidades.Bloco;
 import br.com.unifor.escalonador.entidades.IndiceBloco;
 import br.com.unifor.escalonador.entidades.Listas;
 import br.com.unifor.escalonador.entidades.Processo;
+import br.com.unifor.escalonador.swing.App;
 
 import java.util.*;
 
@@ -11,6 +12,7 @@ public class MemoriaBestFit implements Memoria {
   private final long tamanho;
   private long totalTamanho;
   private int indice;
+  private int limiar;
 
   private static List<List<IndiceBloco>> blocosVazios = new ArrayList<>();
   private static Map<Long, List<IndiceBloco>> blocoMap = new HashMap<>();
@@ -21,6 +23,7 @@ public class MemoriaBestFit implements Memoria {
     totalTamanho = 0;
     indice = 0;
     Listas.getInstance().listaMemoria = new ArrayList<>();
+    limiar = Integer.parseInt(App.txfLimiar.getText());
   }
 
   public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
@@ -30,6 +33,7 @@ public class MemoriaBestFit implements Memoria {
       indice++;
       totalTamanho += tamanhoBloco;
     }
+    App.lblEspacoUsadoMemoria.setText("Espaco Usado na Mem\u00F3ria: " + espacoUsadoMemoria());
   }
 
   public synchronized void addElemento(long tamanhoBloco, Processo processo) {
@@ -41,6 +45,7 @@ public class MemoriaBestFit implements Memoria {
         break;
       }
     }
+    App.lblEspacoUsadoMemoria.setText("Espaco Usado na Mem\u00F3ria: " + espacoUsadoMemoria());
   }
 
   public synchronized Processo removeElemento(Processo processo) {
@@ -52,6 +57,7 @@ public class MemoriaBestFit implements Memoria {
         s.setProcesso(null);
       }
     }
+    App.lblEspacoUsadoMemoria.setText("Espaco Usado na Mem\u00F3ria: " + espacoUsadoMemoria());
     return aux;
   }
 
@@ -82,5 +88,24 @@ public class MemoriaBestFit implements Memoria {
       return true;
     }
     return false;
+  }
+
+  public synchronized boolean excedeuLimiar() {
+    if ((espacoUsadoMemoria() * 100) / tamanho >= limiar) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public synchronized long espacoUsadoMemoria() {
+    long tamanhoAux = 0;
+    for (int i = 0; i < Listas.getInstance().listaMemoria.size(); i++) {
+      Bloco s = Listas.getInstance().listaMemoria.get(i);
+      if (s.getProcesso() != null) {
+        tamanhoAux += s.getTamanhoBloco();
+      }
+    }
+    return tamanhoAux;
   }
 }

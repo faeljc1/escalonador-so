@@ -14,5 +14,6 @@ public interface Memoria {
 
   boolean existeBlocoVazio(long tamanhoBloco);
 
-  //boolean existeBloco(long tamanhoBloco);
+  boolean excedeuLimiar();
+
 }

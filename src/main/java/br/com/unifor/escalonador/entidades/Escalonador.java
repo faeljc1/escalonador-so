@@ -169,9 +169,11 @@ public class Escalonador extends SwingWorker<Void, Void> {
       painel.add(lblProcesso);
       painel.doLayout();
       painel.repaint();
+      painel.revalidate();
     }
     painel.doLayout();
     painel.repaint();
+    painel.revalidate();
   }
 
   public synchronized void exibirMemoria(JPanel painel) {
@@ -184,10 +186,12 @@ public class Escalonador extends SwingWorker<Void, Void> {
         painel.add(lblProcesso);
         painel.doLayout();
         painel.repaint();
+        painel.revalidate();
       }
     }
     painel.doLayout();
     painel.repaint();
+    painel.revalidate();
   }
 
   public synchronized void atualizaPaineis(Cores cores, Listas listas) {
@@ -203,6 +207,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfProcessosIniciais.setEnabled(false);
     App.txfNumeroProcessadores.setEnabled(false);
     App.txfMemoria.setEnabled(false);
+    App.txfLimiar.setEnabled(false);
   }
 
   public void estadoFinalizou() {
@@ -211,6 +216,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfProcessosIniciais.setEnabled(true);
     App.txfNumeroProcessadores.setEnabled(true);
     App.txfMemoria.setEnabled(true);
+    App.txfLimiar.setEnabled(true);
   }
 
   public void estadoParou() {
@@ -224,6 +230,7 @@ public class Escalonador extends SwingWorker<Void, Void> {
     App.txfNumeroProcessadores.setEditable(false);
     App.txfMemoria.setEditable(false);
     App.txfQuantum.setEditable(false);
+    App.txfLimiar.setEnabled(false);
 
     App.txfProcessosIniciais.setText("");
     App.txfNumeroProcessadores.setText("");
@@ -274,8 +281,10 @@ public class Escalonador extends SwingWorker<Void, Void> {
       painel.add(lblProcesso);
       painel.doLayout();
       painel.repaint();
+      painel.revalidate();
     }
     painel.doLayout();
     painel.repaint();
+    painel.revalidate();
   }
 }
