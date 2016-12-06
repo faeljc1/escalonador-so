@@ -259,8 +259,26 @@ public class Escalonador extends SwingWorker<Void, Void> {
     }
   }
 
+  public static synchronized void exibirDiscoRigido(JPanel painel) {
+    JLabel lblProcesso;
+    painel.removeAll();
+    for (Processo processo : Listas.getInstance().listaDiscoRigido) {
+      lblProcesso = new JLabel("<html><body>Processo: " + processo.getIdentificador() + "<br>Memória Processo: "
+          + processo.getTamanhoMemoria() + "<br>Bloco Memória: " + processo.getTamanhoMemoria() + "</body></html>");
 
-  public static synchronized void exibirListasMemoria(JPanel painel) {
+      painel.add(lblProcesso);
+      painel.doLayout();
+      painel.repaint();
+      painel.revalidate();
+    }
+    painel.doLayout();
+    painel.repaint();
+    painel.revalidate();
+  }
+
+
+
+  /*public static synchronized void exibirListasMemoria(JPanel painel) {
     JLabel lblProcesso;
     painel.removeAll();
     Set<Long> chaves = Listas.blocoMap.keySet();
@@ -286,5 +304,5 @@ public class Escalonador extends SwingWorker<Void, Void> {
     painel.doLayout();
     painel.repaint();
     painel.revalidate();
-  }
+  }*/
 }

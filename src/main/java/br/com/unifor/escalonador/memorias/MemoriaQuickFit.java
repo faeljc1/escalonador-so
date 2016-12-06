@@ -157,7 +157,7 @@ public class MemoriaQuickFit implements Memoria {
         listas.blocoMap.get((long) 1000).add(new IndiceBloco(i, b));
       }
     }
-    Escalonador.exibirListasMemoria(App.painelListaMemoria);
+    Escalonador.exibirDiscoRigido(App.painelListaMemoria);
     listaRequisicoes = new ArrayList<>();
     Listas.getInstance().blocoMap = new HashMap<>();
   }

@@ -70,7 +70,6 @@ public class Cores {
         p.setQuantum(--quantum);
         if (tempoRestante <= 0) {
           lista.finalAddProcesso(p);
-          //aqui
           if (memoria.excedeuLimiar()) {
             memoria.removeElemento(p);
             addDiscoRigido(p);
@@ -78,7 +77,13 @@ public class Cores {
           if (!lista.aptosEstaVazio()) {
             cores.remove(i);
             Processo aux = lista.aptosRemoveProcesso(0);
+            if (discoRigido.existeProcessoDisco(aux)) {
+              discoRigido.removeElemento(aux);
+            }
             addMemoria(lista, aux, i);
+            if (memoria.excedeuLimiar()) {
+              swapMParaD(lista);
+            }
           } else {
             cores.remove(i);
           }
@@ -173,6 +178,29 @@ public class Cores {
       lista.finalAddProcesso(aux);
       cores.remove(aux);
       memoria.removeElemento(aux);
+    }
+  }
+
+  public synchronized void swapMParaD(Listas listas) {
+    List<Processo> aptosAux = listas.aptos;
+    for (int i = 0; i < listas.listaMemoria.size(); i++) {
+      for (int j = aptosAux.size() - 1; j >= 0; j--) {
+        if (listas.listaMemoria.get(i).getProcesso() != null && listas.listaMemoria.get(i).getProcesso().getIdentificador() == aptosAux.get(j).getIdentificador()) {
+          listas.listaDiscoRigido.add(listas.listaMemoria.remove(i).getProcesso());
+          return;
+        }
+      }
+    }
+  }
+
+  public synchronized void swapDParaM(Listas listas) {
+    for (int i = 0; i < listas.listaMemoria.size(); i++) {
+      for (int j = 0; j < listas.aptos.size(); j++) {
+        if (listas.listaMemoria.get(i).getProcesso().getIdentificador() == listas.aptos.get(j).getIdentificador()) {
+          listas.listaDiscoRigido.add(listas.listaMemoria.remove(i).getProcesso());
+          return;
+        }
+      }
     }
   }
 }

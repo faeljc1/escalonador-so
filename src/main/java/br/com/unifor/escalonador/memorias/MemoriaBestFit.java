@@ -92,9 +92,9 @@ public class MemoriaBestFit implements Memoria {
 
   public synchronized boolean excedeuLimiar() {
     if ((espacoUsadoMemoria() * 100) / tamanho >= limiar) {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 

@@ -1,9 +1,6 @@
 package br.com.unifor.escalonador.memorias;
 
-import br.com.unifor.escalonador.entidades.Bloco;
-import br.com.unifor.escalonador.entidades.IndiceBloco;
-import br.com.unifor.escalonador.entidades.Listas;
-import br.com.unifor.escalonador.entidades.Processo;
+import br.com.unifor.escalonador.entidades.*;
 import br.com.unifor.escalonador.swing.App;
 
 import java.util.ArrayList;
@@ -22,6 +19,8 @@ public class DiscoRigido {
 
   public synchronized void addElemento(Processo processo) {
     lista.listaDiscoRigido.add(processo);
+    App.lblEspacoUsadoHD.setText("Espaco Usado no Disco Rígido: " + espacoUsadoDiscoRigido());
+    Escalonador.exibirDiscoRigido(App.painelListaMemoria);
   }
 
   public synchronized Processo removeElemento(Processo processo) {
@@ -32,10 +31,11 @@ public class DiscoRigido {
       }
     }
     App.lblEspacoUsadoHD.setText("Espaco Usado no Disco Rígido: " + espacoUsadoDiscoRigido());
+    Escalonador.exibirDiscoRigido(App.painelListaMemoria);
     return aux;
   }
 
-  public synchronized boolean existeProcesso(Processo processo) {
+  public synchronized boolean existeProcessoDisco(Processo processo) {
     for (int i = 0; i < lista.listaDiscoRigido.size(); i++) {
       if (lista.listaDiscoRigido.get(i).getIdentificador() == processo.getIdentificador()) {
         return true;
