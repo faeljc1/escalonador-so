@@ -90,11 +90,21 @@ public class Cores {
         } else if (quantum <= 0) {
           int quantumFinal = p.getQuantumFinal();
           p.setQuantum(quantumFinal);
-          memoria.removeElemento(p);
+          if (memoria.excedeuLimiar()) {
+            memoria.removeElemento(p);
+            addDiscoRigido(p);
+          }
+          //memoria.removeElemento(p);
           lista.aptosAddProcesso(p);
           cores.remove(i);
           Processo aux = lista.aptosRemoveProcesso(0);
+          if (discoRigido.existeProcessoDisco(aux)) {
+            discoRigido.removeElemento(aux);
+          }
           addMemoria(lista, aux, i);
+          if (memoria.excedeuLimiar()) {
+            swapMParaD(lista);
+          }
         } else {
           Random r = new Random();
           int requisicao = r.nextInt(25) + 1;
