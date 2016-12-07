@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="90e34264-4938-4ca6-8581-e79e69647b2a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java" afterPath="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java" />
     </list>
     <ignored path="EscalonadorSO.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +29,7 @@
       <file leaf-file-name="Escalonador.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1581">
+            <state relative-caret-position="186">
               <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
               <folding />
             </state>
@@ -39,9 +39,22 @@
       <file leaf-file-name="MemoriaBestFit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state relative-caret-position="33">
+              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NumerosRandom.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/NumerosRandom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="34" />
+              <folding>
+                <element signature="e#439#440#0" expanded="true" />
+                <element signature="e#496#497#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,11 +78,9 @@
       <file leaf-file-name="DiscoRigido.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/DiscoRigido.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
+            <state relative-caret-position="731">
               <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +88,8 @@
       <file leaf-file-name="Cores.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="106" column="11" selection-start-line="106" selection-start-column="11" selection-end-line="106" selection-end-column="11" />
+            <state relative-caret-position="1410">
+              <caret line="205" column="37" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -166,9 +177,9 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaMergeFit.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaQuickFit.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/DiscoRigido.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java" />
       </list>
     </option>
   </component>
@@ -419,8 +430,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -986,12 +997,13 @@
       <workItem from="1480988771856" duration="3974000" />
       <workItem from="1481024631902" duration="12594000" />
       <workItem from="1481043660725" duration="741000" />
-      <workItem from="1481069027547" duration="1149000" />
+      <workItem from="1481069027547" duration="2276000" />
+      <workItem from="1481143942308" duration="2664000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="235334000" />
+    <option name="totallyTimeSpent" value="239125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1015,7 +1027,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38737202" sideWeight="0.4969743" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38737202" sideWeight="0.4969743" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1096,7 +1108,7 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="128" />
+      <option name="time" value="129" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1221,13 +1233,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/algoritmos/RoundRobinMergeFit.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/algoritmos/RoundRobinQuickFit.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/swing/Teste2.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/NumerosRandom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/algoritmos/LTG.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
@@ -1286,22 +1291,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/swing/App.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -1318,18 +1307,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/DiscoRigido.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
+        <state relative-caret-position="731">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Escalonador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/NumerosRandom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/memorias/MemoriaBestFit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/unifor/escalonador/entidades/Cores.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="106" column="11" selection-start-line="106" selection-start-column="11" selection-end-line="106" selection-end-column="11" />
+        <state relative-caret-position="1410">
+          <caret line="205" column="37" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="37" />
           <folding />
         </state>
       </provider>

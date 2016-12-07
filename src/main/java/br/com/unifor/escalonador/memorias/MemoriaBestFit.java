@@ -29,6 +29,9 @@ public class MemoriaBestFit implements Memoria {
   public synchronized void criaSetor(long tamanhoBloco, Processo elemento) {
     if (existeExpaco(tamanhoBloco)) {
       Bloco b = new Bloco(tamanhoBloco, elemento, null, null);
+      while (indice > Listas.getInstance().listaMemoria.size()) {
+        --indice;
+      }
       Listas.getInstance().listaMemoria.add(indice, b);
       indice++;
       totalTamanho += tamanhoBloco;
